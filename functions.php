@@ -13,4 +13,14 @@ function conection_to_database($db_config)
     }
 }
 
+function get_page()
+{
+    return isset($_GET["p"]) ? $_GET["p"] : 1;
+}
+
+function get_torrents($post_per_page, $conection)
+{
+
+}
+
 ?>
