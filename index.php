@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 require "admin/config.php";
 require "functions.php";
@@ -9,6 +9,7 @@ if(!$conection)
 {
     header("location: error.php");
 }
+
 
 require "view/index.view.php";
 

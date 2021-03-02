@@ -1,6 +1,6 @@
 <?php
 
-$bd_config = array(
+$db_config = array(
     "database" => "torrent_page",
     "user" => "root",
     "password" => ""
