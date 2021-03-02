@@ -8,23 +8,34 @@
 
 a {
     text-decoration: none;
-    color: black;
 }
 
 header {
     height: 50px;
-    
+
     margin-bottom: 20px;
 
     background-color: #222222;
 }
 
-table {
+.wraper {
     width: 800px;
 
     margin: auto;
+    padding: 0px 16px;
+}
 
+table {
     border-collapse: collapse;
+    margin: auto;
+}
+
+.colaps {
+    max-width: 450px;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 th, td {
@@ -35,8 +46,6 @@ th, td {
 }
 
 .thead__name {
-    width: auto;
-
     text-align: left;
 }
 
@@ -60,10 +69,29 @@ th, td {
     color:black;
 }
 
+.fa-download {
+    padding-right: 6px;
+}
+
 .fa-download, .fa-magnet {
+    display: inline-block;
     color: #337ab7;
 }
 
 .text-center {
     text-align: center;
+    white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+    .colaps {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+    .fa-download {
+        padding: 0px 0px 6px 0px;
+    }
+    .fa-download, .fa-magnet {
+        display: block;
+    }
 }
