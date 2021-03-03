@@ -16,7 +16,6 @@ ul, li {
  
 .user__list {
     height: 100%;
-    width: 100px; 
 }
 
 .first__list {
@@ -77,6 +76,16 @@ header {
 
     margin: auto;
     padding: 0px 16px;
+}
+
+.login_errorbox {
+    padding: 15px;
+
+    border: 1px solid transparent;
+    border-radius: 2px;
+    border-color: #ebccd1;
+    color: #B84442;
+    background-color: #F2DEDE;
 }
 
 table {
@@ -147,6 +156,7 @@ th, td {
 
 .top h1 {
     margin-bottom: 20px;
+    padding-top: 20px;
     font-size: 36px;
     font-weight: 500;
 }
@@ -156,9 +166,14 @@ th, td {
     line-height: 1.4;
 }
 
-form {
+.row {
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
+}
+
+.error_message {
+    color: #BB4442;
 }
 
 label {
@@ -171,8 +186,11 @@ input {
     max-width: 300px;
 
     padding: 0px 10px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 input::placeholder {

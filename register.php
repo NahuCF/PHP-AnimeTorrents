@@ -1,11 +1,14 @@
-<?php
+<?php session_start();
 
 require "admin/config.php";
 require "functions.php";
 
+check_user_session();
+
 $user_error = "";
 $email_error = "";
 $password_error = "";
+$password_error_confirm = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -26,21 +29,52 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         ));
         $result = $statement->fetch();
 
-        if(!empty($result["user"]))
+        if(empty($user))
         {
-            $user_error .= "User in use. <br>";
+            $user_error .= "Obligatory field.";
+        }
+        else if(!empty($result["user"]))
+        {
+            $user_error .= "Username not avaible. ";
         }
 
-        if(!empty($result["email"]))
+        if(empty($email))
         {
-            $email_error .= "Email in use. <br>";
+            $email_error .= "Obligatory field.";
+        }
+        else if(!empty($result["email"]))
+        {
+            $email_error .= "Email not avaible.";
         }
 
-        if($password != $password_confirm)
+        if(empty($password))
         {
-            $password_error .= "Passwords must match. <br>";
+            $password_error = "Obligatory field.";
         }
-        echo $error;
+
+        if(empty($password_confirm))
+        {
+            $password_error_confirm = "Obligatory field.";
+        }
+
+        if(!empty($password) && !empty($password_confirm) && $password != $password_confirm)
+        {
+            $password_error = "Passwords must match.";
+        }
+
+        // Register user if It's all ok
+        if(empty($user_error) && empty($email_error) && empty($password_error))
+        {
+            $statement = $conection->prepare("INSERT INTO users values(null, :user, :email, :password)");
+            $statement->execute(
+                array(
+                    "user" => $user,
+                    "email" => $email,
+                    "password" => $password
+            ));
+            
+            header("Location: login.php");
+        }
     }
     else
     {

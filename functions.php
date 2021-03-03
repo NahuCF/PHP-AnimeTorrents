@@ -23,4 +23,17 @@ function get_torrents($post_per_page, $conection)
 
 }
 
+function clean_string($word)
+{
+    
+}
+
+function check_user_session()
+{
+    if(isset($_SESSION["user"]))
+    {
+        header("Location: index.php");
+    }
+}
+
 ?>

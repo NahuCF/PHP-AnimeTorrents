@@ -11,7 +11,11 @@
     <title>Animu</title>
 </head>
 <body>
-    <?php require "header.php"; ?>
+    <?php if(isset($_SESSION["user"])): ?>
+        <?php require "user-header.view.php"; ?>
+    <?php else: ?>
+        <?php require "header.php"; ?>
+    <?php endif; ?>
     
     <div class="wraper">
         <table>
@@ -26,17 +30,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="colaps"><a href="#">[TSDM自購][210303]THE IDOLM@STER CINDERELLA GIRLS STARLIGHT MASTER COLLABORATION! Great Journey／大橋彩香、福原綾香、原紗友里、原田ひとみ、立花日菜、長江里加[320K]</a></td>
-                    <td class="text-center">
-                        <a href="#"><i class="fas fa-download"></i></a>
-                        <a href="#"><i class="fas fa-magnet"></i></a>
-                    </td>
-                    <td class="text-center hide">153.3 MB</td>
-                    <td class="text-center hide">2021-03-02 02:44</td>
-                    <td class="text-center">1</td>
-                    <td class="text-center">2</td>
-                </tr>
+                <?php foreach($torrents as $torrent): ?>
+                    <tr>
+                        <td class="colaps"><a href="#"><?php echo $torrent["name"] ?></a></td>
+                        <td class="text-center">
+                            <a href="#"><i class="fas fa-download"></i></a>
+                            <a href="<?php echo $torrent["magnet"] ?>"><i class="fas fa-magnet"></i></a>
+                        </td>
+                        <td class="text-center hide">153.3 MB</td>
+                        <td class="text-center hide"><?php echo $torrent["date"] ?></td>
+                        <td class="text-center">1</td>
+                        <td class="text-center">2</td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
