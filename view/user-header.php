@@ -1,7 +1,7 @@
 <header>
     <a href="index.php">asd</a>
+    <a href="upload.php">UPLOAD</a>
     <ul class="user__list">
-        <a href="upload.php">UPLOAD</a>
         <li class="first__list">
             <a class="user__type" id="user__type" href="#">
                 <i class="far fa-user"></i>

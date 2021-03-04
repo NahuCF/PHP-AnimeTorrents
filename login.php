@@ -3,7 +3,7 @@
 require "admin/config.php";
 require "functions.php";
 
-check_user_session();
+check_if_user_session();
 
 $error = "";
 
@@ -32,6 +32,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         if(empty($result["user"]) || empty($result["password"]))
         {
             $error = "<strong>Login failed!</strong> Incorrect username or password.";
+        }
+        else
+        {
+            header ("Location: index.php");
         }
     }
     else

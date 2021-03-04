@@ -3,7 +3,7 @@
 require "admin/config.php";
 require "functions.php";
 
-check_user_session();
+check_if_user_session();
 
 $user_error = "";
 $email_error = "";

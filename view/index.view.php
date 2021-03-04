@@ -12,7 +12,7 @@
 </head>
 <body>
     <?php if(isset($_SESSION["user"])): ?>
-        <?php require "user-header.view.php"; ?>
+        <?php require "user-header.php"; ?>
     <?php else: ?>
         <?php require "header.php"; ?>
     <?php endif; ?>
@@ -46,7 +46,7 @@
             </tbody>
         </table>
     </div>
-
+    
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
 </body>
 </html>
