@@ -1,6 +1,7 @@
 var active = false;
 var btn = document.getElementById("user__type");
 var subMenu = document.getElementById("switch");
+var userType = document.getElementById("user__type");
 
 btn.addEventListener("click", function()
 {
@@ -10,6 +11,7 @@ btn.addEventListener("click", function()
 
         subMenu.style.opacity = 0;
         subMenu.style.pointerEvents = "none";
+        userType.style.color = "#9D9D9D";
     }
     else
     {
@@ -17,5 +19,6 @@ btn.addEventListener("click", function()
 
         subMenu.style.opacity = 1;
         subMenu.style.pointerEvents = "auto";
+        userType.style.color = "white";
     }
 });

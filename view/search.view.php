@@ -16,7 +16,11 @@
     <?php else: ?>
         <?php require "header.php"; ?>
     <?php endif; ?>
-        
+    
+    <?php if(!empty($error)): ?>
+        <h1><?php echo $error ?></h1>
+    <?php endif; ?>
+
     <div class="wraper">
         <table>
             <thead>

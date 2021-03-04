@@ -61,7 +61,7 @@ function get_user_id($conection)
     return $resutlado["ID"];
 }
 
-function get_file_size($file_name)
+function get_torrent_size($file_name)
 {
     define("LENGTH_WORD", 7); // lengthi
     define("kb", 1000);
@@ -69,32 +69,35 @@ function get_file_size($file_name)
     define("gb", 1000000000);
     define("tb", 1000000000000);
 
-    $size = "";
+    $size = null;
     $file_content = file_get_contents($file_name);
+    $particion1 = explode("lengthi", $file_content);
 
-    $begin = strpos($file_content, "lengthi") + LENGTH_WORD;
-    $end = strpos($file_content, "e4:name");
-
-    for($begin; $begin < $end; $begin++)
+    for($i = 1; $i < sizeof($particion1) - 1; $i++)
     {
-        $size .= $file_content[$begin];
+        $temporal_content = $particion1[$i];
+
+        $number_in_array = explode("e", $particion1[$i]);
+        $first_file_size = $number_in_array[0];
+        
+        $size += (int)$first_file_size;
     }
 
     if($size < mb)
     {
-        return round((int)$size / kb, 1) . "KB";
+        return round($size / kb, 1) . " KB";
     }
     elseif($size >= mb && $size < gb) 
     {
-        return round((int)$size / mb, 1) . "MB";
+        return round($size / mb, 1) . " MB";
     }
     elseif($size >= gb && $size < tb)  
     {
-        return round((int)$size / gb, 1) . "GB";
+        return round($size / gb, 1) . " GB";
     }
     else
     {
-        return round((int)$size / tb, 1) . "TB";
+        return round($size / tb, 1) . " TB";
     }
 }
 

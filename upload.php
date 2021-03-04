@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $file_type = $_FILES["torrent_data"]["type"];
         $file_data = file_get_contents($_FILES["torrent_data"]["tmp_name"]);
         $torrent_magnet = $_POST["torrent_magnet"];
-        $file_size = get_file_size($_FILES["torrent_data"]["tmp_name"]);
+        $file_size = get_torrent_size($_FILES["torrent_data"]["tmp_name"]);
 
         $statement = $conection->prepare("INSERT INTO torrents VALUES(null, :name, :type, :data, :userID, null, :magnet, :size)");
         $statement->execute(
