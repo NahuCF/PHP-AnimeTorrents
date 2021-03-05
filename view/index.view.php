@@ -16,18 +16,11 @@
     <?php else: ?>
         <?php require "header.php"; ?>
     <?php endif; ?>
-        
+  
     <div class="wraper">
         <table>
             <thead>
-                <tr>
-                    <th class="thead__name">Name</th>
-                    <th class="thead__link">Link</th>
-                    <th class="thead__size hide"><a href="#">Size</a></th>
-                    <th class="thead__date hide">Date</th>
-                    <th class="thead__uparrow"><a href="#"><i class="fas fa-arrow-down"></i></a></th>
-                    <th class="thead__downarrow"><a href="#"><i class="fas fa-arrow-up"></i></a></th>
-                </tr>
+                <?php require "view/table_head.php"; ?>
             </thead>
             <tbody>
                 <?php foreach($torrents as $torrent): ?>
@@ -42,7 +35,7 @@
                             <?php endif; ?>
                         </td>
                         <td class="text-center hide"><?php echo $torrent["size"]; ?></td>
-                        <td class="text-center hide"><?php echo date('y-m-d h:m', strtotime($torrent["date"])); ?></td>
+                        <td class="text-center hide"><?php echo date('Y-m-d h:m', strtotime($torrent["date"])); ?></td>
                         <td class="text-center">1</td>
                         <td class="text-center">2</td>
                     </tr>

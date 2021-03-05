@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 require "admin/config.php";
 require "functions.php";
@@ -11,9 +11,9 @@ if(!$conection)
 
 $error = "";
 
-if($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET["input_search"]))
+if($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET["s"]))
 {
-    $word = $_GET["input_search"];
+    $word = $_GET["s"];
 
     $statement = $conection->prepare("SELECT * FROM torrents WHERE name LIKE :word");
     $statement->execute(array("word" => "%$word%"));

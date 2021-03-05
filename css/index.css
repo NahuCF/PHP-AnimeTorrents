@@ -11,6 +11,10 @@ a {
     color: #337ab7;
 }
 
+tr > th {
+    border-bottom-width: 2px;
+}
+
 ul, li {
     list-style: none;
 }
@@ -96,7 +100,7 @@ table {
 }
 
 .colaps {
-    max-width: 450px;
+    max-width: 200px;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -105,33 +109,81 @@ table {
 
 th, td {
     padding: 8px;
-
+    
     box-sizing: border-box;
     border: 1px solid #ddd;
 }
 
 .thead__name {
+    width: 400px;
     text-align: left;
 }
 
 .thead__link {
-    width: 70px;
+    width: 60px;
 }
 
 .thead__size {
     width: 100px;
+    padding: 0px;
 }
 
-.thead__size > a {
+.thead__size a {
     color: black;
+    display: block;
+    height: 100%;
 }
 
 .thead__date {
     width: 140px;
+    padding: 0px;
+}
+
+.thead__date a {
+    color: black;
+}
+
+.relative {
+    position: relative;
+}
+
+.relative a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.fa-sort-up {
+    display: block;
+}
+
+.fa-sort-up, .fa-sort-down {
+    height: 1px;
+    color: #808080;
 }
 
 .thead__uparrow, .thead__downarrow {
-    width: 50px;
+    padding: 8px 17px;
+}
+
+.arrows_contenedor {
+    position: absolute;
+    right: 6px;
+    top: 8px;
+
+    pointer-events: none;
+}
+
+.contenedor_likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.likes {
+    position: inherit;
 }
 
 .fa-arrow-up, .fa-arrow-down {
@@ -174,6 +226,11 @@ th, td {
     border-radius: 0px 4px 4px 0px;
     background-color: #337ab7;
     border-color: #2e6da4;
+}
+
+.header__submitbtn:hover {
+    background-color: #286090;
+    cursor: pointer;
 }
 
 .fa-search {
@@ -255,7 +312,6 @@ input::placeholder {
 .browse_contenedor {
     display: table;
     margin-bottom: 10px;
-    max-width: 700px;
 }
 
 .browse_contenedor > label {
@@ -304,7 +360,16 @@ input::placeholder {
     color: red;
 }
 
-@media (max-width: 800px) {
+/* SEARCH.PHP */
+
+.search__h1 {
+    padding-top: 30px;
+
+    font-size: 24px;
+    font-weight: 500;
+}
+
+@media (max-width: 760px) {
     .colaps {
         white-space: pre-wrap;
         word-break: break-all;

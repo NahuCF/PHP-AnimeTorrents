@@ -18,42 +18,38 @@
     <?php endif; ?>
     
     <?php if(!empty($error)): ?>
-        <h1><?php echo $error ?></h1>
+        <div class="wrap">
+            <h1 class="search__h1"><?php echo $error ?></h1>
+        </div>
+    <?php else: ?>
+        <div class="wraper">
+            <table>
+                <thead>
+                    <?php require "view/table_head.php"; ?>
+                </thead>
+                <tbody>
+                    <?php foreach($torrents as $torrent): ?>
+                        <tr>
+                            <td class="colaps"><a href="#"><?php echo $torrent["name"] ?></a></td>
+                            <td class="text-center">
+                                <a href="#"><i class="fas fa-download"></i></a>
+                                <?php if(!empty($torrent["magnet"])): ?>
+                                    <a href="<?php echo $torrent["magnet"] ?>"><i class="fas fa-magnet"></i></a>
+                                <?php else: ?>
+                                    <a href="#" id="magnet__noclick" ?><i class="fas fa-magnet" id="magnet__red"></i></a>
+                                <?php endif; ?>
+                            </td>
+                            <td class="text-center hide"><?php echo $torrent["size"]; ?></td>
+                            <td class="text-center hide"><?php echo date('y-m-d h:m', strtotime($torrent["date"])); ?></td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">2</td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     <?php endif; ?>
 
-    <div class="wraper">
-        <table>
-            <thead>
-                <tr>
-                    <th class="thead__name">Name</th>
-                    <th class="thead__link">Link</th>
-                    <th class="thead__size hide"><a href="#">Size</a></th>
-                    <th class="thead__date hide">Date</th>
-                    <th class="thead__uparrow"><a href="#"><i class="fas fa-arrow-down"></i></a></th>
-                    <th class="thead__downarrow"><a href="#"><i class="fas fa-arrow-up"></i></a></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($torrents as $torrent): ?>
-                    <tr>
-                        <td class="colaps"><a href="#"><?php echo $torrent["name"] ?></a></td>
-                        <td class="text-center">
-                            <a href="#"><i class="fas fa-download"></i></a>
-                            <?php if(!empty($torrent["magnet"])): ?>
-                                <a href="<?php echo $torrent["magnet"] ?>"><i class="fas fa-magnet"></i></a>
-                            <?php else: ?>
-                                <a href="#" id="magnet__noclick" ?><i class="fas fa-magnet" id="magnet__red"></i></a>
-                            <?php endif; ?>
-                        </td>
-                        <td class="text-center hide"><?php echo $torrent["size"]; ?></td>
-                        <td class="text-center hide"><?php echo date('y-m-d h:m', strtotime($torrent["date"])); ?></td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">2</td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
     
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
 </body>

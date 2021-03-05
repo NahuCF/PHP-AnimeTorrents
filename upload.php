@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
     else 
     {
-        $file_name = $_FILES["torrent_data"]["name"];
+        $file_name = !empty($_POST["optional_display_name"]) ? $_POST["optional_display_name"] : $_FILES["torrent_data"]["name"];
         $file_type = $_FILES["torrent_data"]["type"];
         $file_data = file_get_contents($_FILES["torrent_data"]["tmp_name"]);
         $torrent_magnet = $_POST["torrent_magnet"];
@@ -45,6 +45,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 "size" => $file_size
             )
         );
+
+        header("Location: index.php");
     }
 }
 
