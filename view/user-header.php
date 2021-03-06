@@ -2,7 +2,7 @@
     <a href="index.php">asd</a>
     <a href="upload.php">UPLOAD</a>
     <form action="search.php" method="GET">
-        <input class="input_search" name="s" type="text" placeholder="Search...">
+        <input class="input_search" name="w" type="text" placeholder="Search...">
         <div class="button__headercontenedor" >
             <button class="header__submitbtn" type="submit"><i class="fa fa-search fa-fw"></i></button>
         </div>

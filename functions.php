@@ -61,14 +61,8 @@ function get_user_id($conection)
     return $resutlado["ID"];
 }
 
-function get_torrent_size($file_name)
+function get_torrentsize_byts($file_name)
 {
-    define("LENGTH_WORD", 7); // lengthi
-    define("kb", 1000);
-    define("mb", 1000000);
-    define("gb", 1000000000);
-    define("tb", 1000000000000);
-
     $size = null;
     $file_content = file_get_contents($file_name);
     $particion1 = explode("lengthi", $file_content);
@@ -83,21 +77,31 @@ function get_torrent_size($file_name)
         $size += (int)$first_file_size;
     }
 
-    if($size < mb)
+    return (int)$size;
+}
+
+function bytes_to_string($bytes)
+{
+    $kb = 1000;
+    $mb = 1000000;
+    $gb = 1000000000;
+    $tb = 100000000000;
+
+    if($bytes < $mb)
     {
-        return round($size / kb, 1) . " KB";
+        return round($bytes / $kb, 1) . " KB";
     }
-    elseif($size >= mb && $size < gb) 
+    elseif($bytes >= $mb && $bytes < $gb) 
     {
-        return round($size / mb, 1) . " MB";
+        return round($bytes / $mb, 1) . " MB";
     }
-    elseif($size >= gb && $size < tb)  
+    elseif($bytes >= $gb && $bytes < $tb)  
     {
-        return round($size / gb, 1) . " GB";
+        return round($bytes / $gb, 1) . " GB";
     }
     else
     {
-        return round($size / tb, 1) . " TB";
+        return round($bytes / $tb, 1) . " TB";
     }
 }
 

@@ -47,8 +47,11 @@ ul, li {
     position: absolute;
     right: 0px;
 
+    z-index: 1;
     border: 1px solid #ccc;
+    border-radius: 0px 0px 4px 4px;
     background-color: white;
+    box-shadow: -1px 4px 36px -9px rgba(0,0,0,0.75);
 
     pointer-events: none;
     opacity: 0;
@@ -112,6 +115,10 @@ th, td {
     
     box-sizing: border-box;
     border: 1px solid #ddd;
+}
+
+tr {
+    height: 37px;
 }
 
 .thead__name {

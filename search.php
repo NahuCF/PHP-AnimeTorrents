@@ -11,13 +11,55 @@ if(!$conection)
 
 $error = "";
 
-if($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET["s"]))
+if(!empty($_GET["w"]))
 {
-    $word = $_GET["s"];
+    $word = $_GET["w"];
 
-    $statement = $conection->prepare("SELECT * FROM torrents WHERE name LIKE :word");
-    $statement->execute(array("word" => "%$word%"));
-    $torrents = $statement->fetchAll();
+    if(isset($_GET["c"]) && isset($_GET["o"]))
+    {
+        if($_GET["c"] == "size" && $_GET["o"] == "desc")
+        {
+            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY size DESC");
+            $statement->execute();
+            $torrents = $statement->fetchAll();
+        }
+        elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
+        {
+            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY size ASC");
+            $statement->execute();
+            $torrents = $statement->fetchAll();
+        }
+        elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
+        {
+            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date DESC");
+            $statement->execute();
+            $torrents = $statement->fetchAll();
+        }
+        elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
+        {
+            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date ASC");
+            $statement->execute();
+            $torrents = $statement->fetchAll();
+        }
+        elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
+        {
+            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY likes DESC");
+            $statement->execute();
+            $torrents = $statement->fetchAll();
+        }
+        elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
+        {
+            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY likes ASC");
+            $statement->execute();
+            $torrents = $statement->fetchAll();
+        }
+    }
+    else
+    {
+        $statement = $conection->prepare("SELECT * FROM torrents WHERE name LIKE :word");
+        $statement->execute(array("word" => "%$word%"));
+        $torrents = $statement->fetchAll();
+    }
 
     if(empty($torrents))
     {

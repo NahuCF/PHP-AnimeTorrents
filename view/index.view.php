@@ -23,23 +23,7 @@
                 <?php require "view/table_head.php"; ?>
             </thead>
             <tbody>
-                <?php foreach($torrents as $torrent): ?>
-                    <tr>
-                        <td class="colaps"><a href="#"><?php echo $torrent["name"] ?></a></td>
-                        <td class="text-center">
-                            <a href="#"><i class="fas fa-download"></i></a>
-                            <?php if(!empty($torrent["magnet"])): ?>
-                                <a href="<?php echo $torrent["magnet"] ?>"><i class="fas fa-magnet"></i></a>
-                            <?php else: ?>
-                                <a href="#" id="magnet__noclick" ?><i class="fas fa-magnet" id="magnet__red"></i></a>
-                            <?php endif; ?>
-                        </td>
-                        <td class="text-center hide"><?php echo $torrent["size"]; ?></td>
-                        <td class="text-center hide"><?php echo date('Y-m-d h:m', strtotime($torrent["date"])); ?></td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">2</td>
-                    </tr>
-                <?php endforeach; ?>
+                <?php require "view/table_body.php" ?>
             </tbody>
         </table>
     </div>

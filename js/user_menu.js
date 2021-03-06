@@ -12,6 +12,7 @@ btn.addEventListener("click", function()
         subMenu.style.opacity = 0;
         subMenu.style.pointerEvents = "none";
         userType.style.color = "#9D9D9D";
+        userType.style.backgroundColor = "#222222";
     }
     else
     {
@@ -20,5 +21,6 @@ btn.addEventListener("click", function()
         subMenu.style.opacity = 1;
         subMenu.style.pointerEvents = "auto";
         userType.style.color = "white";
+        userType.style.backgroundColor = "#080808";
     }
 });
