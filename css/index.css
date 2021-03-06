@@ -15,6 +15,18 @@ tr > th {
     border-bottom-width: 2px;
 }
 
+.row__table-grey {
+    background-color: #F9F9F9;
+}
+
+.row__table-grey:hover {
+    background-color: #F5F5F5
+}
+
+.row__table-white:hover {
+    background-color: #F9F9F9;
+}
+
 ul, li {
     list-style: none;
 }
@@ -307,6 +319,7 @@ input::placeholder {
 
 .registerbtn__submit:hover {
     cursor: pointer;
+    background-color: #204D74;
 }
 
 /* Upload.view */
@@ -338,6 +351,10 @@ input::placeholder {
 
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+
+.btn__browse:hover {
+    background-color: #E6E6E6;
 }
 
 .btn__browse > span {

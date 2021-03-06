@@ -1,7 +1,7 @@
 <?php $even_number = 0; ?>
 <?php foreach($torrents as $torrent): ?>
     <?php if($even_number % 2 == 0): ?>
-        <tr style="background-color: #F5F5F5">
+        <tr class="row__table row__table-grey">
             <td class="colaps"><a href="#"><?php echo $torrent["name"] ?></a></td>
             <td class="text-center">
                 <a href="#"><i class="fas fa-download"></i></a>
@@ -17,7 +17,7 @@
             <td class="text-center">2</td>
         </tr>
     <?php else: ?>
-        <tr>
+        <tr class="row__table row__table-white">
             <td class="colaps"><a href="#"><?php echo $torrent["name"] ?></a></td>
             <td class="text-center">
                 <a href="#"><i class="fas fa-download"></i></a>
