@@ -31,6 +31,9 @@
                     <?php require "view/table_body.php" ?>
                 </tbody>
             </table>
+            <div class="pagination__container">
+                <?php require "view/pagination.php"; ?>
+            </div>
         </div>
     <?php endif; ?>
 
