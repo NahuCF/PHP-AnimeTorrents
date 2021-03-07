@@ -13,46 +13,32 @@ if(isset($_GET["c"]) && isset($_GET["o"]))
 {
     if($_GET["c"] == "size" && $_GET["o"] == "desc")
     {
-        $statement = $conection->prepare("SELECT * FROM torrents ORDER BY size DESC");
-        $statement->execute();
-        $torrents = $statement->fetchAll();
+        $torrents = torrents_byColumn_indexDESC($page_config["torrents_per_page"], $conection, "size");
     }
     elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
     {
-        $statement = $conection->prepare("SELECT * FROM torrents ORDER BY size ASC");
-        $statement->execute();
-        $torrents = $statement->fetchAll();
+        $torrents = torrents_byColumn_indexASC($page_config["torrents_per_page"], $conection, "size");
     }
     elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
     {
-        $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date DESC");
-        $statement->execute();
-        $torrents = $statement->fetchAll();
+        $torrents = torrents_byColumn_indexDESC($page_config["torrents_per_page"], $conection, "date");
     }
     elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
     {
-        $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date ASC");
-        $statement->execute();
-        $torrents = $statement->fetchAll();
+        $torrents = torrents_byColumn_indexASC($page_config["torrents_per_page"], $conection, "date");
     }
     elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
     {
-        $statement = $conection->prepare("SELECT * FROM torrents ORDER BY likes DESC");
-        $statement->execute();
-        $torrents = $statement->fetchAll();
+        $torrents = torrents_byColumn_indexDESC($page_config["torrents_per_page"], $conection, "likes");
     }
     elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
     {
-        $statement = $conection->prepare("SELECT * FROM torrents ORDER BY likes ASC");
-        $statement->execute();
-        $torrents = $statement->fetchAll();
+        $torrents = torrents_byColumn_indexASC($page_config["torrents_per_page"], $conection, "likes");
     }
 }
 else
 {
-    $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date DESC");
-    $statement->execute();
-    $torrents = $statement->fetchAll();
+    $torrents = get_torrents($page_config["torrents_per_page"], $conection);
 }
 
 require "view/index.view.php";

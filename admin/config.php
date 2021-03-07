@@ -7,7 +7,7 @@ $db_config = array(
 );
 
 $page_config = array(
-    "rows_per_page" => 20
+    "torrents_per_page" => 2
 );
 
 ?>

@@ -18,9 +18,76 @@ function get_page()
     return isset($_GET["p"]) ? $_GET["p"] : 1;
 }
 
+///////////////////////////////////////////////////
+// THIS FUNCTIONS WILL ONLY BE USED IN INDEX.PHP //
+///////////////////////////////////////////////////
 function get_torrents($post_per_page, $conection)
 {
+    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents LIMIT $begin, $post_per_page");
+    $statement->execute();
 
+    return $torrents = $statement->fetchAll();
+}
+
+function torrents_byColumn_indexDESC($post_per_page, $conection, $column)
+{
+    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column DESC LIMIT $begin, $post_per_page");
+    $statement->execute();
+
+    return $torrents = $statement->fetchAll();
+}
+
+function torrents_byColumn_indexASC($post_per_page, $conection, $column)
+{
+    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column ASC LIMIT $begin, $post_per_page");
+    $statement->execute();
+
+    return $torrents = $statement->fetchAll();
+}
+
+////////////////////////////////////////////////////
+// THIS FUNCTIONS WILL ONLY BE USED IN SEARCH.PHP //
+////////////////////////////////////////////////////
+function get_torrents_in_search($post_per_page, $conection, $word)
+{
+    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word LIMIT $begin, $post_per_page");
+    $statement->execute(array("word" => "%$word%"));
+
+    return $torrents = $statement->fetchAll();
+}
+
+function torrents_byColumn_searchDESC($post_per_page, $conection, $word, $column)
+{
+    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column DESC LIMIT $begin, $post_per_page");
+    $statement->execute(array("word" => "%$word%"));
+
+    return $torrents = $statement->fetchAll();
+}
+
+function torrents_byColumn_searchASC($post_per_page, $conection, $word, $column)
+{
+    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column ASC LIMIT $begin, $post_per_page");
+    $statement->execute(array("word" => "%$word%"));
+
+    return $torrents = $statement->fetchAll();
+}
+
+// This function will only be uses in pagination.php // 
+function number_of_pages($post_per_page, $conection)
+{
+    $total_torrents = $conection->prepare("SELECT FOUND_ROWS() as total");
+    $total_torrents->execute();
+    $total_torrents = $total_torrents->fetch()["total"];
+
+    $number_of_pages = ceil($total_torrents / $post_per_page);
+
+    return $number_of_pages;
 }
 
 function clean_string($word)

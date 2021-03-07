@@ -19,46 +19,32 @@ if(!empty($_GET["w"]))
     {
         if($_GET["c"] == "size" && $_GET["o"] == "desc")
         {
-            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY size DESC");
-            $statement->execute();
-            $torrents = $statement->fetchAll();
+            $torrents = torrents_byColumn_searchDESC($page_config["torrents_per_page"], $conection, $word, "size");
         }
         elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
         {
-            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY size ASC");
-            $statement->execute();
-            $torrents = $statement->fetchAll();
+            $torrents = torrents_byColumn_searchASC($page_config["torrents_per_page"], $conection, $word, "size");
         }
         elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
         {
-            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date DESC");
-            $statement->execute();
-            $torrents = $statement->fetchAll();
+            $torrents = torrents_byColumn_searchDESC($page_config["torrents_per_page"], $conection, $word, "date");
         }
         elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
         {
-            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY date ASC");
-            $statement->execute();
-            $torrents = $statement->fetchAll();
+            $torrents = torrents_byColumn_searchASC($page_config["torrents_per_page"], $conection, $word, "date");
         }
         elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
         {
-            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY likes DESC");
-            $statement->execute();
-            $torrents = $statement->fetchAll();
+            $torrents = torrents_byColumn_searchDESC($page_config["torrents_per_page"], $conection, $word, "likes");
         }
         elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
         {
-            $statement = $conection->prepare("SELECT * FROM torrents ORDER BY likes ASC");
-            $statement->execute();
-            $torrents = $statement->fetchAll();
+            $torrents = torrents_byColumn_searchASC($page_config["torrents_per_page"], $conection, $word,"likes");
         }
     }
     else
     {
-        $statement = $conection->prepare("SELECT * FROM torrents WHERE name LIKE :word");
-        $statement->execute(array("word" => "%$word%"));
-        $torrents = $statement->fetchAll();
+        $torrents = get_torrents_in_search($page_config["torrents_per_page"], $conection, $word);
     }
 
     if(empty($torrents))
