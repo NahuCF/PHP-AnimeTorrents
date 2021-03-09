@@ -13,7 +13,7 @@
     <title>Register</title>
 </head>
 <body>
-    <!-- <?php require "header.php"; ?> -->
+    <?php require "header.php"; ?>
 
     <div class="wrap">
         <div class="top">

@@ -21,14 +21,6 @@ function get_page()
 ///////////////////////////////////////////////////
 // THIS FUNCTIONS WILL ONLY BE USED IN INDEX.PHP //
 ///////////////////////////////////////////////////
-function get_torrents($post_per_page, $conection)
-{
-    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents LIMIT $begin, $post_per_page");
-    $statement->execute();
-
-    return $torrents = $statement->fetchAll();
-}
 
 function torrents_byColumn_indexDESC($post_per_page, $conection, $column)
 {
@@ -51,14 +43,6 @@ function torrents_byColumn_indexASC($post_per_page, $conection, $column)
 ////////////////////////////////////////////////////
 // THIS FUNCTIONS WILL ONLY BE USED IN SEARCH.PHP //
 ////////////////////////////////////////////////////
-function get_torrents_in_search($post_per_page, $conection, $word)
-{
-    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word LIMIT $begin, $post_per_page");
-    $statement->execute(array("word" => "%$word%"));
-
-    return $torrents = $statement->fetchAll();
-}
 
 function torrents_byColumn_searchDESC($post_per_page, $conection, $word, $column)
 {
@@ -92,7 +76,11 @@ function number_of_pages($post_per_page, $conection)
 
 function clean_string($word)
 {
-    
+    $word = trim($word);
+    $word = htmlspecialchars($word);
+    $word = stripslashes($word);
+
+    return $word;
 }
 
 function check_if_user_session()

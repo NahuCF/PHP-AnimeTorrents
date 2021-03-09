@@ -19,8 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $file_type = "";
     $file_data = "";
     $user_id = get_user_id($conection);
-    $torrent_magnet = "asd";
-    $file_size = "hola";
+    $torrent_magnet = "";
+    $file_size = "";
 
     if(empty($_FILES["torrent_data"]["name"]))
     {
@@ -28,11 +28,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
     else 
     {
-        $file_name = !empty($_POST["optional_display_name"]) ? $_POST["optional_display_name"] : $_FILES["torrent_data"]["name"];
-        $file_type = $_FILES["torrent_data"]["type"];
-        $file_data = file_get_contents($_FILES["torrent_data"]["tmp_name"]);
-        $torrent_magnet = $_POST["torrent_magnet"];
-        $file_size = get_torrentsize_byts($_FILES["torrent_data"]["tmp_name"]);
+        $file_name = !empty($_POST["optional_display_name"]) ? clean_string($_POST["optional_display_name"]) : clean_string($_FILES["torrent_data"]["name"]);
+        $file_type = clean_string($_FILES["torrent_data"]["type"]);
+        $file_data = clean_string(file_get_contents($_FILES["torrent_data"]["tmp_name"]));
+        $torrent_magnet = clean_string($_POST["torrent_magnet"]);
+        $file_size = clean_string(get_torrentsize_byts($_FILES["torrent_data"]["tmp_name"]));
 
         $statement = $conection->prepare("INSERT INTO torrents VALUES(null, :name, :type, :data, :userID, null, :magnet, :size)");
             $statement->execute(

@@ -44,7 +44,7 @@ if(!empty($_GET["w"]))
     }
     else
     {
-        $torrents = get_torrents_in_search($page_config["torrents_per_page"], $conection, $word);
+        $torrents = torrents_byColumn_searchDESC($page_config["torrents_per_page"], $conection, $word, "date");
     }
 
     if(empty($torrents))

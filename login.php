@@ -9,13 +9,13 @@ $error = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $user = $_POST["username"];
-    $password = $_POST["password"];
+    $user = clean_string($_POST["username"]);
+    $password = clean_string($_POST["password"]);
 
     $conection = conection_to_database($db_config);
     if($conection)
     {
-        $statement = $conection->prepare("SELECT * FROM users WHERE user = :user and password = :password LIMIT 1");
+        $statement = $conection->prepare("SELECT * FROM users WHERE user = :user AND password = :password LIMIT 1");
         $statement->execute(
             array(
                 "user" => $user,

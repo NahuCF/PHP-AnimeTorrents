@@ -13,10 +13,10 @@ $password_error_list = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $user = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $password_confirm = $_POST["password__confirm"];
+    $user = clean_string($_POST["username"]);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+    $password = clean_string($_POST["password"]);
+    $password_confirm = clean_string($_POST["password__confirm"]);
 
     $conection = conection_to_database($db_config);
     if($conection)

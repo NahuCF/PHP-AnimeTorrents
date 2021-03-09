@@ -38,7 +38,7 @@ if(isset($_GET["c"]) && isset($_GET["o"]))
 }
 else
 {
-    $torrents = get_torrents($page_config["torrents_per_page"], $conection);
+    $torrents = torrents_byColumn_indexDESC($page_config["torrents_per_page"], $conection, "date");
 }
 
 require "view/index.view.php";
