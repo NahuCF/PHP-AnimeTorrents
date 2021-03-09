@@ -7,8 +7,9 @@ check_if_user_session();
 
 $user_error = "";
 $email_error = "";
+$email_error_list = "";
 $password_error = "";
-$password_error_confirm = "";
+$password_error_list = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -31,39 +32,53 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
         if(empty($user))
         {
-            $user_error .= "Obligatory field.";
+            $user_error = "Obligatory field.";
         }
         else if(!empty($result["user"]))
         {
-            $user_error .= "Username not avaible. ";
+            $user_error = "Username not avaible.";
+        }
+        else if(strlen($user) < 3 || strlen($user) > 20)
+        {
+            $user_error = "Field must be between 3 and 20 characters long.";
         }
 
         if(empty($email))
         {
-            $email_error .= "Obligatory field.";
+            $email_error = "Obligatory field.";
         }
         else if(!empty($result["email"]))
         {
-            $email_error .= "Email not avaible.";
+            $email_error = "Email not avaible.";
+        }
+        else if(!filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) < 5 || strlen($email) > 30)
+        {
+            $email_error_list = "<li> Invalid email address. </li> <li> Field must be between 5 and 30 characters long. </li>";
+        }
+        else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            $email_error = "Invalid email address.";
         }
 
         if(empty($password))
         {
             $password_error = "Obligatory field.";
         }
-
-        if(empty($password_confirm))
+        elseif($password != $password_confirm && strlen($password) < 6 || strlen($password) > 20 && strlen($password_confirm) < 6 || strlen($password_confirm) > 20)
         {
-            $password_error_confirm = "Obligatory field.";
+            $password_error_list = "<li> Passwords must match. </li> <li> Password must be between 6 and 20 characters long.";
         }
-
-        if(!empty($password) && !empty($password_confirm) && $password != $password_confirm)
+        elseif(strlen($password) < 6 || strlen($password) > 20 && strlen($password_confirm) < 6 || strlen($password_confirm) > 20)
+        {
+            $password_error = "Password must be between 6 and 20 characters long.";
+        }
+        elseif($password != $password_confirm)
         {
             $password_error = "Passwords must match.";
         }
 
         // Register user if It's all ok
-        if(empty($user_error) && empty($email_error) && empty($password_error))
+        if(empty($user_error) && empty($email_error) && empty($email_error_list) && empty($password_error) && empty($password_error_list) && !empty($_POST["g-recaptcha-response"]))
         {
             $statement = $conection->prepare("INSERT INTO users values(null, :user, :email, :password)");
             $statement->execute(

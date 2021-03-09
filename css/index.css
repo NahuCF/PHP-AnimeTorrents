@@ -1,9 +1,12 @@
 * {
     margin: 0;
     padding: 0;
-
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
+}
+
+body {
+    line-height: 1.4;
 }
 
 a {
@@ -41,7 +44,7 @@ ul, li {
 }
 
 .user__type {
-    padding: 17px 16px;
+    padding: 15.3px 16px;
     display: block;
 
     color: #9D9D9D;
@@ -61,6 +64,7 @@ ul, li {
 
     z-index: 1;
     border: 1px solid #ccc;
+    border-top: none;
     border-radius: 0px 0px 4px 4px;
     background-color: white;
     box-shadow: -1px 4px 36px -9px rgba(0,0,0,0.75);
@@ -140,7 +144,6 @@ tr {
 }
 
 .thead__name {
-    width: 400px;
     text-align: left;
 }
 
@@ -291,10 +294,19 @@ tr {
 
 .error_message {
     color: #BB4442;
+    max-width: 300px;
+}
+
+.error_message ul {
+    padding-left: 50px;
+}
+
+.error_message ul li  {
+    list-style: disc;
 }
 
 label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-weight: 700;
 }
 
@@ -307,6 +319,24 @@ input {
 
     box-sizing: border-box;
     border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.label__error {
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: #a94442;
+}
+
+.input__errror {
+    height: 30px;
+    max-width: 300px;
+
+    padding: 0px 10px;
+    margin-bottom: 10px;
+
+    box-sizing: border-box;
+    border: 1px solid #a94442;
     border-radius: 4px;
 }
 
@@ -417,6 +447,10 @@ input::placeholder {
     color: #337AB7;
 }
 
+.pagination li:not(.active, .left__aquo-disabled, .right__aquo-disabled):hover {
+   background-color: #EEEEEE;
+}
+
 .pagination li a {
     display: inline-block;
     padding: 6px 12px;
@@ -493,24 +527,15 @@ input::placeholder {
 }
 
 @media (max-width: 425px) {
-    
     .wrap {
         margin: 0px;
     }
-    
-    /* table th, td, a, i  {
-        font-size: 28px;
-    } */
 
-    table th, tr {
-        padding: 20px 4px;
-    }
+}
 
-    .arrows_contenedor {
-        top: 20px;
-    }
-
-    /* tbody i {
-        font-size: 20px;
-    } */
+@media (max-width: 350px){
+    .g-recaptcha {
+        transform: scale(0.87);
+        transform-origin: 0 0;
+    }   
 }
