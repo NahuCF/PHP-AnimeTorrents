@@ -13,7 +13,7 @@ $error = "";
 
 if(!empty($_GET["w"]))
 {
-    $word = $_GET["w"];
+    $word = clean_string($_GET["w"]);
 
     if(isset($_GET["c"]) && isset($_GET["o"]))
     {

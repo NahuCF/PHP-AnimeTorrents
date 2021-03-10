@@ -3,7 +3,10 @@
 require "admin/config.php";
 require "functions.php";
 
-check_if_user_session();
+if(user_session_exists())
+{
+    header("Location: index.php");
+}
 
 $user_error = "";
 $email_error = "";

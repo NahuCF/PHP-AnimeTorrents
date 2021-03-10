@@ -16,7 +16,7 @@
     <div class="wrap">
         <?php if(!empty($error)): ?>
             <div class="login_errorbox">
-                <p><?php echo $error ?></p>
+                <p><?php echo $error; ?></p>
             </div>
         <?php endif; ?>
 

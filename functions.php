@@ -22,19 +22,19 @@ function get_page()
 // THIS FUNCTIONS WILL ONLY BE USED IN INDEX.PHP //
 ///////////////////////////////////////////////////
 
-function torrents_byColumn_indexDESC($post_per_page, $conection, $column)
+function torrents_byColumn_indexDESC($torrents_per_page, $conection, $column)
 {
-    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column DESC LIMIT $begin, $post_per_page");
+    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column DESC LIMIT $begin, $torrents_per_page");
     $statement->execute();
 
     return $torrents = $statement->fetchAll();
 }
 
-function torrents_byColumn_indexASC($post_per_page, $conection, $column)
+function torrents_byColumn_indexASC($torrents_per_page, $conection, $column)
 {
-    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column ASC LIMIT $begin, $post_per_page");
+    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column ASC LIMIT $begin, $torrents_per_page");
     $statement->execute();
 
     return $torrents = $statement->fetchAll();
@@ -44,32 +44,32 @@ function torrents_byColumn_indexASC($post_per_page, $conection, $column)
 // THIS FUNCTIONS WILL ONLY BE USED IN SEARCH.PHP //
 ////////////////////////////////////////////////////
 
-function torrents_byColumn_searchDESC($post_per_page, $conection, $word, $column)
+function torrents_byColumn_searchDESC($torrents_per_page, $conection, $word, $column)
 {
-    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column DESC LIMIT $begin, $post_per_page");
+    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column DESC LIMIT $begin, $torrents_per_page");
     $statement->execute(array("word" => "%$word%"));
 
     return $torrents = $statement->fetchAll();
 }
 
-function torrents_byColumn_searchASC($post_per_page, $conection, $word, $column)
+function torrents_byColumn_searchASC($torrents_per_page, $conection, $word, $column)
 {
-    $begin = get_page() > 1 ? get_page() * $post_per_page - $post_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column ASC LIMIT $begin, $post_per_page");
+    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column ASC LIMIT $begin, $torrents_per_page");
     $statement->execute(array("word" => "%$word%"));
 
     return $torrents = $statement->fetchAll();
 }
 
 // This function will only be uses in pagination.php // 
-function number_of_pages($post_per_page, $conection)
+function number_of_pages($torrents_per_page, $conection)
 {
     $total_torrents = $conection->prepare("SELECT FOUND_ROWS() as total");
     $total_torrents->execute();
     $total_torrents = $total_torrents->fetch()["total"];
 
-    $number_of_pages = ceil($total_torrents / $post_per_page);
+    $number_of_pages = ceil($total_torrents / $torrents_per_page);
 
     return $number_of_pages;
 }
@@ -83,19 +83,15 @@ function clean_string($word)
     return $word;
 }
 
-function check_if_user_session()
+function user_session_exists()
 {
     if(isset($_SESSION["user"]))
     {
-        header("Location: index.php");
+        return true;
     }
-}
-
-function check_ifnot_user_session()
-{
-    if(!isset($_SESSION["user"]))
+    else
     {
-        header("Location: index.php");
+        return false;
     }
 }
 
@@ -132,7 +128,7 @@ function get_torrentsize_byts($file_name)
         $size += (int)$first_file_size;
     }
 
-    return (int)$size;
+    return $size;
 }
 
 function bytes_to_string($bytes)
