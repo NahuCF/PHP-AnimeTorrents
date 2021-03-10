@@ -3,7 +3,7 @@
 require "admin/config.php";
 require "functions.php";
 
-if(user_session_exists())
+if(isset($_SESSION["user"]))
 {
     header("Location: index.php");
 }

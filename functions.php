@@ -18,6 +18,44 @@ function get_page()
     return isset($_GET["p"]) ? $_GET["p"] : 1;
 }
 
+function clean_string($word)
+{
+    $word = trim($word);
+    $word = htmlspecialchars($word);
+    $word = stripslashes($word);
+
+    return $word;
+}
+
+// This function will only be uses in pagination.php // 
+function number_of_pages($torrents_per_page, $conection)
+{
+    $total_torrents = $conection->prepare("SELECT FOUND_ROWS() as total");
+    $total_torrents->execute();
+    $total_torrents = $total_torrents->fetch()["total"];
+
+    $number_of_pages = ceil($total_torrents / $torrents_per_page);
+
+    return $number_of_pages;
+}
+
+function get_user_id($conection)
+{   
+    $user_id = $_SESSION["user"];
+    if(empty($user_id))
+    {
+        header("Location: error.php");
+    }
+
+    $statement = $conection->prepare("SELECT * FROM users WHERE user = :user LIMIT 1");
+    $statement->execute(array(
+        "user" =>  $user_id
+    ));
+    $resutlado = $statement->fetch();
+
+    return $resutlado["ID"];
+}
+
 ///////////////////////////////////////////////////
 // THIS FUNCTIONS WILL ONLY BE USED IN INDEX.PHP //
 ///////////////////////////////////////////////////
@@ -60,56 +98,6 @@ function torrents_byColumn_searchASC($torrents_per_page, $conection, $word, $col
     $statement->execute(array("word" => "%$word%"));
 
     return $torrents = $statement->fetchAll();
-}
-
-// This function will only be uses in pagination.php // 
-function number_of_pages($torrents_per_page, $conection)
-{
-    $total_torrents = $conection->prepare("SELECT FOUND_ROWS() as total");
-    $total_torrents->execute();
-    $total_torrents = $total_torrents->fetch()["total"];
-
-    $number_of_pages = ceil($total_torrents / $torrents_per_page);
-
-    return $number_of_pages;
-}
-
-function clean_string($word)
-{
-    $word = trim($word);
-    $word = htmlspecialchars($word);
-    $word = stripslashes($word);
-
-    return $word;
-}
-
-function user_session_exists()
-{
-    if(isset($_SESSION["user"]))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-function get_user_id($conection)
-{   
-    $user_id = $_SESSION["user"];
-    if(empty($user_id))
-    {
-        header("Location: error.php");
-    }
-
-    $statement = $conection->prepare("SELECT * FROM users WHERE user = :user LIMIT 1");
-    $statement->execute(array(
-        "user" =>  $user_id
-    ));
-    $resutlado = $statement->fetch();
-
-    return $resutlado["ID"];
 }
 
 function get_torrentsize_byts($file_name)
