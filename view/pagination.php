@@ -1,7 +1,7 @@
 <?php $total_pages = number_of_pages($page_config["torrents_per_page"], $conection); ?>
 <ul class="pagination">
     
-    <?php if(get_page() == 1): ?>
+    <?php if(get_page() <= 1): ?>
         <li class="left__aquo-disabled">&laquo;</li>
     <?php else: ?>
         <li>
@@ -78,7 +78,7 @@
         <?php endif; ?>
     <?php endfor; ?>
     
-    <?php if(get_page() == $total_pages): ?>
+    <?php if(get_page() >= $total_pages): ?>
         <li class="right__aquo-disabled">&raquo;</li>
     <?php else: ?>
         <li>

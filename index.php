@@ -6,7 +6,7 @@ require "functions.php";
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
-    header("location: error.php");
+    header("Location: error.php");
 }
 
 if(isset($_GET["c"]) && isset($_GET["o"]))

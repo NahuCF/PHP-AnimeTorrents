@@ -35,7 +35,7 @@
                 </div>
 
                 <?php if(!empty($error)): ?>
-                    <div class="error_message"><?php echo $error ?></div>
+                    <div class="error_message"><?php echo $error; ?></div>
                 <?php endif; ?>
             </div>
             
