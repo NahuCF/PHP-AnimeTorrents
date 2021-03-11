@@ -144,4 +144,26 @@ function bytes_to_string($bytes)
     }
 }
 
+function retrive_comment_date($comment)
+{
+    $time = time() - strtotime($comment["date"]) - 18000; 
+
+    $hours = date("H", $time);
+    $minutes = date("i", $time);
+    $secs = date("s", $time);
+
+    if($hours >= 1)
+    {
+        return $hours . " hours " . $minutes . " minutes " . $secs . " seconds ago";
+    }
+    else if($minutes >= 1) 
+    {
+        return $minutes . " minutes " . $secs . " seconds ago";
+    }
+    else
+    {
+        return $secs . " seconds ago";
+    }
+}
+
 ?>

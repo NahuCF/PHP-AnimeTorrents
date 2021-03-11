@@ -16,6 +16,12 @@
             </a>
             <ul class="sub__menu" id="switch">
                 <li>
+                    <a href="profile.php">
+                        <i class="fas fa-cog"></i>
+                        Profile
+                    </a>
+                </li>
+                <li>
                     <a href="logout.php">
                         <i class="fa fa-times fa-fw"></i>
                         Logout

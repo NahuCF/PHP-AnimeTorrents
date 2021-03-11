@@ -3,7 +3,7 @@
 session_destroy();
 $_SESSION = array();
 
-header("location: ./");
+header("Location: ./");
 
 die();
 

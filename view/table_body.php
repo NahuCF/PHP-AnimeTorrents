@@ -2,7 +2,7 @@
 <?php foreach($torrents as $torrent): ?>
     <?php if($even_number % 2 == 0): ?>
         <tr class="row__table row__table-grey">
-            <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"] ?></a></td>
+            <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"]; ?></a></td>
             <td class="text-center">
                 <a href="#"><i class="fas fa-download"></i></a>
                 <?php if(!empty($torrent["magnet"])): ?>
@@ -18,7 +18,7 @@
         </tr>
     <?php else: ?>
         <tr class="row__table row__table-white">
-            <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"] ?></a></td>
+            <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"]; ?></a></td>
             <td class="text-center">
                 <a href="#"><i class="fas fa-download"></i></a>
                 <?php if(!empty($torrent["magnet"])): ?>

@@ -32,12 +32,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $file_size = clean_string(get_torrentsize_byts($_FILES["torrent_data"]["tmp_name"]));
         $file_description = clean_string($_POST["description"]);
 
-        $statement = $conection->prepare("INSERT INTO torrents VALUES(null, :name, :type, :data, :userID, null, :magnet, :size, :likes, :dislikes, :description)");
+        $statement = $conection->prepare("INSERT INTO torrents VALUES(null, :name, :type, :data, :userName, :userID, null, :magnet, :size, :likes, :dislikes, :description)");
             $statement->execute(
                 array(
                     "name" => $file_name,
                     "type" => $file_type,
                     "data" => $file_data,
+                    "userName" => $_SESSION["user"],
                     "userID" => $user_id,
                     "magnet" => $torrent_magnet,
                     "size" => $file_size,

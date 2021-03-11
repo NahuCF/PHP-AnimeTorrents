@@ -16,7 +16,99 @@
     <?php else: ?>
         <?php require "header.php"; ?>
     <?php endif; ?>
-  
+
+    <div class="single-wrap">
+        <div class="singletop-container">
+            <div class="top">
+                <h3><?php echo $torrent["name"]; ?></h3>
+            </div>
+            <div class="center">
+                <div class="center-container">
+                    <div class="center-container__row">
+                        <div class="center_container__left">Submitter: </div>
+                        <div><a href="<?php echo "user_torrents.php?=" . $torrent["userID"]; ?>"><?php echo $torrent["torrentOwnerName"]; ?></a></div>
+                    </div>
+                    <div class="center-container__row">
+                        <div class="center_container__left">Information: </div>
+                        <div>No information</div>
+                    </div>
+                    <div class="center-container__row">
+                        <div class="center_container__left">Size: </div>
+                        <div><?php echo bytes_to_string($torrent["size"]); ?></div>
+                    </div>
+                </div>
+                <div class="center-container">
+                    <div class="center-container__row">
+                        <div class="center_container__left">Date: </div>
+                        <div><?php echo date('Y-m-d H:i', strtotime($torrent["date"])); ?></div>
+                    </div>
+                    <div class="center-container__row">
+                        <div class="center_container__left">Likes: </div>
+                        <div><?php echo $torrent["likes"]; ?></div>
+                    </div>
+                    <div class="center-container__row">
+                        <div class="center_container__left">Dislikes: </div>
+                        <div><?php echo $torrent["dislikes"]; ?></div>
+                    </div>
+                </div>
+            </div> 
+            <div class="bottom">
+                <a href="">
+                    <i class="fas fa-download"></i>
+                    Dowload Torrent
+                </a>
+                <span> or </span>
+                <?php if(!empty($torrent["magnet"])): ?>
+                    <a href="<?php echo $torrent["magnet"]; ?>">
+                        <i class="fas fa-magnet"></i>
+                        Magnet
+                    </a>
+                <?php else: ?>
+                    <a id="magnet__red" href="<?php echo $torrent["magnet"]; ?>">
+                        <i id="magnet__red" class="fas fa-magnet"></i>
+                        Magnet
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="singlemiddle-container">
+            <?php if(empty($torrent["description"])): ?>
+                <h3>No description</h3>
+            <?php else: ?>
+                <p><?php echo $torrent["description"]; ?></p>
+            <?php endif; ?>
+        </div>
+
+        <div class="comments-container">
+            <div class="comments-container__top">
+                <h3><?php echo "Comments - " . sizeof($comments); ?></h3>
+            </div>
+            <div class="wrap-container">
+                <?php foreach($comments as $comment): ?>
+                    <div class="comment">
+                        <div class="comment-photo">
+                            <div class="comment-user"><a href="<?php echo "user_torrents.php?=" . $comment["commentOwnerID"]; ?>"><?php echo $comment["commentOwnerName"]; ?></a></div>
+                            <img src="imgs/default.png" alt="avatar">
+                        </div>
+                        <div class="comment-container">
+                            <div><?php echo retrive_comment_date($comment); ?></div>
+                            <div class="comment-text"><?php echo $comment["comment"]; ?></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+                <?php if(isset($_SESSION["user"])): ?>
+                    <form class="comment__form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST">
+                        <label for="comment">Make a comment</label>
+                        <textarea name="comment" id="comment"></textarea>
+                        <button class="comment__form-button" type="submit">Submit</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
 </body>
 </html>

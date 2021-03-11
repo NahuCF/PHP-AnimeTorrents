@@ -3,6 +3,7 @@
     padding: 0;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 body {
@@ -185,6 +186,10 @@ tr {
 
 .fa-sort-up {
     display: block;
+}
+
+.fa-fw {
+    width: 14px;
 }
 
 .fa-sort-up, .fa-sort-down {
@@ -420,6 +425,7 @@ input::placeholder {
 
 #magnet__red {
     color: red;
+    pointer-events: none;
 }
 
 .upload__form .optional {
@@ -542,37 +548,153 @@ input::placeholder {
     border-bottom-right-radius: 4px;
 }
 
-@media (max-width: 760px) {
-    .colaps {
-        white-space: pre-wrap;
-        word-break: break-all;
-    }
 
-    .hide {
-        display: none;
-    }
+/* SINGLE.PHP */
 
-    .fa-download {
-        padding: 0px 0px 6px 0px;
-    }
-
-    .fa-download, .fa-magnet {
-        display: block;
-    } 
+.single-wrap {
+    max-width: 1300px;
+    padding: 0px 20px 20px;
+    margin: 20px auto 0px;
 }
 
-@media (max-width: 425px) {
-    .wrap {
-        margin: 0px;
-    }
-
+.singletop-container {
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
 }
 
-@media (max-width: 350px) {
-    .g-recaptcha {
-        transform: scale(0.87);
-        transform-origin: 0 0;
-    }   
+.singletop-container .top {
+    border-bottom: 1px solid #ddd;
+}
+
+.singletop-container .bottom {
+    border-top: 1px solid #ddd;
+}
+
+.singletop-container .top, .bottom {
+    background-color: #F5F5F5;
+    padding: 10px 15px;
+}
+
+.singletop-container .top h3 {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.singletop-container .center {
+    padding: 15px 15px;
+}
+
+.singletop-container .center {
+    display: flex;
+}
+
+.singletop-container .bottom i {
+    padding: 0px;
+    font-size: 12px;
+}
+
+.center-container {
+    width: 50%;
+}
+
+.center-container__row {
+    display: flex;
+}
+
+.center-container__row .center_container__left {
+    width: 90px;
+}
+
+.singlemiddle-container {
+    padding: 15px;
+    margin-bottom: 20px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+
+.comments-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+
+.comments-container__top {
+    background-color: #F5F5F5;
+    padding: 10px 15px;
+}
+
+.wrap-container {
+    padding: 10px 6px 0px;
+}
+
+.comment {
+    display: flex;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+
+.comment-container {
+    margin-left: 30px;
+}
+
+.comment-photo img {
+    max-width: 120px;
+}
+
+.comment-text {
+    margin-top: 10px;
+}
+
+.comment__form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px 10px;
+}
+
+.comment__form textarea {
+    height: 110px;
+    padding: 6px 12px;
+    margin-bottom: 14px;
+    border: 1px solid #ccc;
+}
+
+.comment__form-button {
+    width: 60px;
+    height: 30px;
+    background-color: #5CB85C;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: white;
+    font-size: 12px;
+}
+
+.comment__form-button:hover {
+    background-color: #449D44;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .upload {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 840px) {
+    .comment {
+        flex-direction: column;
+    }
+
+    .comment-container {
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 768px) {
@@ -591,8 +713,47 @@ input::placeholder {
     }
 }
 
-@media (max-width: 1200px) {
-    .upload {
-        max-width: 800px;
+
+@media (max-width: 760px) {
+    .colaps {
+        white-space: pre-wrap;
+        word-break: break-all;
     }
+
+    .hide {
+        display: none;
+    }
+
+    .text-center .fa-download {
+        padding: 0px 0px 6px 0px;
+    }
+
+    .text-center i {
+        display: block;
+    } 
+}
+
+@media (max-width: 500px) {
+    .center {
+        flex-direction: column;
+
+    }
+
+    .center-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 425px) {
+    .wrap {
+        margin: 0px;
+    }
+
+}
+
+@media (max-width: 350px) {
+    .g-recaptcha {
+        transform: scale(0.87);
+        transform-origin: 0 0;
+    }   
 }
