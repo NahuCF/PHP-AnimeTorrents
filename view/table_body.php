@@ -4,7 +4,7 @@
         <tr class="row__table row__table-grey">
             <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"]; ?></a></td>
             <td class="text-center">
-                <a href="#"><i class="fas fa-download"></i></a>
+                <a href="<?php echo "dowload.php?f=" . $torrent["ID"]; ?>"><i class="fas fa-download"></i></a>
                 <?php if(!empty($torrent["magnet"])): ?>
                     <a href="<?php echo $torrent["magnet"] ?>"><i class="fas fa-magnet"></i></a>
                 <?php else: ?>
@@ -20,7 +20,7 @@
         <tr class="row__table row__table-white">
             <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"]; ?></a></td>
             <td class="text-center">
-                <a href="#"><i class="fas fa-download"></i></a>
+                <a href="<?php echo "dowload.php?f=" . $torrent["ID"]; ?>"><i class="fas fa-download"></i></a>
                 <?php if(!empty($torrent["magnet"])): ?>
                     <a href="<?php echo $torrent["magnet"] ?>"><i class="fas fa-magnet"></i></a>
                 <?php else: ?>

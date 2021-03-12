@@ -53,7 +53,7 @@
                 </div>
             </div> 
             <div class="bottom">
-                <a href="">
+                <a href="<?php echo "dowload.php?f=" . $torrent["ID"]; ?>">
                     <i class="fas fa-download"></i>
                     Dowload Torrent
                 </a>
