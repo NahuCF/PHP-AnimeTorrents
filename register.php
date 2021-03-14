@@ -83,13 +83,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         // Register user if It's all ok
         if(empty($user_error) && empty($email_error) && empty($email_error_list) && empty($password_error) && empty($password_error_list) && !empty($_POST["g-recaptcha-response"]))
         {
-            $statement = $conection->prepare("INSERT INTO users values(null, :user, :email, :password)");
+            $statement = $conection->prepare("INSERT INTO users values(null, :user, :email, :password, null, 'User')");
             $statement->execute(
                 array(
                     "user" => $user,
                     "email" => $email,
                     "password" => $password
-            ));
+                )
+            );
             
             header("Location: login.php");
         }

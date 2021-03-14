@@ -39,23 +39,6 @@ function number_of_pages($torrents_per_page, $conection)
     return $number_of_pages;
 }
 
-function get_user_id($conection)
-{   
-    $user_id = $_SESSION["user"];
-    if(empty($user_id))
-    {
-        header("Location: error.php");
-    }
-
-    $statement = $conection->prepare("SELECT * FROM users WHERE user = :user LIMIT 1");
-    $statement->execute(array(
-        "user" =>  $user_id
-    ));
-    $resutlado = $statement->fetch();
-
-    return $resutlado["ID"];
-}
-
 ///////////////////////////////////////////////////
 // THIS FUNCTIONS WILL ONLY BE USED IN INDEX.PHP //
 ///////////////////////////////////////////////////

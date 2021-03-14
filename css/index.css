@@ -352,7 +352,7 @@ input::placeholder {
 
 .registerbtn__submit {
     width: 80px;
-    height: 40px;
+    height: 35px;
     background-color: #337AB7;
     color: white;
     border-radius: 4px;
@@ -713,6 +713,85 @@ input::placeholder {
     }
 }
 
+/* PROFILE */
+
+.profile {
+    padding-bottom: 20px;
+}
+
+.profile h2 {
+    font-weight: 500;
+}
+
+.profile h2, .profile h2 strong {
+    padding: 20px 0px;
+    font-size: 30px;
+}
+.profile-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.profile-rows__container {
+    display: flex;
+    align-items:  center;
+    margin-bottom: 20px;
+}
+
+.profile-row {
+    display: flex;
+    margin-left: 50px;
+}
+
+.profile-row div:first-child {
+    width: 180px;
+    font-weight: bold;
+}
+
+.avatar {
+    max-width: 120px;
+    margin-bottom: 20px;
+}
+
+.profile__tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile__tabs div {
+    margin-right: 3px;
+    margin-bottom: -1px;
+
+    display: flex;
+    align-items: center;
+    height: 42px;
+
+    border-radius: 4px 4px 0px 0px;
+}
+
+.profile__tabs .active {
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    background-color: white;
+    pointer-events: none;
+}
+
+.active a {
+    color: black;
+}
+
+.profile__tabs div:hover {
+    background-color: #EEEEEE;
+}
+
+.profile__tabs div a {
+    padding: 10px 15px;
+}
+
+.profile__form-email {
+    display: none;
+}
 
 @media (max-width: 760px) {
     .colaps {
@@ -730,7 +809,20 @@ input::placeholder {
 
     .text-center i {
         display: block;
-    } 
+    }
+    
+    .profile-container {
+        flex-direction: column;
+    }
+    
+    .profile-row {
+        margin-left: 25px;
+        flex-direction: column;
+    }
+
+    input {
+        max-width: unset;
+    }
 }
 
 @media (max-width: 500px) {

@@ -12,12 +12,7 @@ if(!$conection)
 $torrent_id = clean_string($_GET["f"]);
 
 $statement = $conection->prepare("SELECT * FROM torrents WHERE ID = :id LIMIT 1");
-$statement->execute(
-    array(
-        "id" => $torrent_id
-    )
-);
-
+$statement->execute(array("id" => $torrent_id));
 $torrent = $statement->fetch();
 
 header("Content-Disposition: attachment; filename=" . $torrent["name"]);

@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $file_name = !empty($_POST["optional_display_name"]) ? clean_string($_POST["optional_display_name"]) : clean_string($_FILES["torrent_data"]["name"]);
         $file_type = clean_string($_FILES["torrent_data"]["type"]);
         $file_data = file_get_contents($_FILES["torrent_data"]["tmp_name"]);
-        $user_id = get_user_id($conection);
+        $user_id = $_SESSION["userID"];
         $torrent_magnet = clean_string($_POST["torrent_magnet"]);
         $file_size = clean_string(get_torrentsize_byts($_FILES["torrent_data"]["tmp_name"]));
         $file_description = clean_string($_POST["description"]);
