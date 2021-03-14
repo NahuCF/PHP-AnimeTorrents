@@ -26,7 +26,7 @@
                 <div class="center-container">
                     <div class="center-container__row">
                         <div class="center_container__left">Submitter: </div>
-                        <div><a href="<?php echo "user_torrents.php?=" . $torrent["userID"]; ?>"><?php echo $torrent["torrentOwnerName"]; ?></a></div>
+                        <div><a href="<?php echo "torrents.php?u=" . $torrent["torrentOwnerName"]; ?>"><?php echo $torrent["torrentOwnerName"]; ?></a></div>
                     </div>
                     <div class="center-container__row">
                         <div class="center_container__left">Information: </div>
@@ -89,7 +89,7 @@
                 <?php for($i = 0; $i < $comments_size; $i++): ?>
                     <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
                         <div class="comment-photo">
-                            <div class="comment-user"><a href="<?php echo "torrents.php?=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
+                            <div class="comment-user"><a href="<?php echo "torrents.php?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
                             <img src="imgs/default.png" alt="avatar">
                         </div>
                         <div class="comment-container">
