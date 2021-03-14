@@ -15,6 +15,11 @@ a {
     color: #337ab7;
 }
 
+h3 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
 tr > th {
     border-bottom-width: 2px;
 }
@@ -102,6 +107,10 @@ header {
     
     margin: auto;
     padding: 0px 16px 40px;
+}
+
+.wraper h3 {
+    margin-bottom: 10px;
 }
 
 .login_errorbox {
@@ -550,6 +559,10 @@ input::placeholder {
 
 
 /* SINGLE.PHP */
+
+.comment:target {
+    border: 2px solid black;
+}
 
 .single-wrap {
     max-width: 1300px;

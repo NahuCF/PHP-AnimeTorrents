@@ -4,13 +4,83 @@
     <th class="thead__size hide relative">
         <a href="
             <?php 
-                if(isset($_GET["w"]))
+                $column = "size";
+                if(isset($_GET["u"]) && isset($_GET["w"])) // In search with word and u (user torrent)
                 {
-                    echo "?w=" . $_GET["w"] . (!isset($_GET["o"]) || $_GET["o"] != "desc" ? "&c=size&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "size" ? "&c=size&o=asc" : "&c=size&o=desc")); 
+                    $user = clean_string($_GET["u"]);
+                    $word = clean_String($_GET["w"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                    }
                 }
-                else
+                else if(isset($_GET["u"])) // In search with u (user torrent)
                 {
-                    echo !isset($_GET["o"]) || $_GET["o"] != "desc" ? "?c=size&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "size" ? "?c=size&o=asc" : "?c=size&o=desc"); 
+                    $user = clean_string($_GET["u"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&o=desc&c=" . $column;
+                    }
+                }
+                else if(isset($_GET["w"])) // In search
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?w=" . $word . "&o=desc&c=" . $column;
+                    }
+                }
+                else // In index
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?o=desc&c=" . $column;
+                    }
                 }
             ?>">
         </a>
@@ -23,13 +93,83 @@
     <th class="thead__date hide relative">
         <a href="
             <?php  
-                if(isset($_GET["w"]))
+                $column = "date";
+                if(isset($_GET["u"]) && isset($_GET["w"])) // In search with word and u (user torrent)
                 {
-                    echo "?w=" . $_GET["w"] . (!isset($_GET["o"]) || $_GET["o"] != "desc" ? "&c=date&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "date" ? "&c=date&o=asc" : "&c=date&o=desc")); 
+                    $user = clean_string($_GET["u"]);
+                    $word = clean_String($_GET["w"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                    }
                 }
-                else
+                else if(isset($_GET["u"])) // In search with u (user torrent)
                 {
-                    echo !isset($_GET["o"]) || $_GET["o"] != "desc" ? "?c=date&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "date" ? "?c=date&o=asc" : "?c=date&o=desc"); 
+                    $user = clean_string($_GET["u"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&o=desc&c=" . $column;
+                    }
+                }
+                else if(isset($_GET["w"])) // In search
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?w=" . $word . "&o=desc&c=" . $column;
+                    }
+                }
+                else // In index
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?o=desc&c=" . $column;
+                    }
                 }
             ?>">
         </a>
@@ -42,13 +182,83 @@
     <th class="thead__uparrow relative">
         <a href="
             <?php 
-                if(isset($_GET["w"]))
+                $column = "likes";
+                if(isset($_GET["u"]) && isset($_GET["w"])) // In search with word and u (user torrent)
                 {
-                    echo "?w=" . $_GET["w"] . (!isset($_GET["o"]) || $_GET["o"] != "desc" ? "&c=likes&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "likes" ? "&c=likes&o=asc" : "&c=likes&o=desc")); 
+                    $user = clean_string($_GET["u"]);
+                    $word = clean_String($_GET["w"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                    }
                 }
-                else
+                else if(isset($_GET["u"])) // In search with u (user torrent)
                 {
-                    echo !isset($_GET["o"]) || $_GET["o"] != "desc" ? "?c=likes&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "likes" ? "?c=likes&o=asc" : "?c=likes&o=desc"); 
+                    $user = clean_string($_GET["u"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&o=desc&c=" . $column;
+                    }
+                }
+                else if(isset($_GET["w"])) // In search
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?w=" . $word . "&o=desc&c=" . $column;
+                    }
+                }
+                else // In index
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?o=desc&c=" . $column;
+                    }
                 }
             ?>">
         </a>
@@ -62,13 +272,83 @@
     <th class="thead__downarrow relative">
         <a href="
             <?php 
-                if(isset($_GET["w"]))
+                $column = "dislikes";
+                if(isset($_GET["u"]) && isset($_GET["w"])) // In search with word and u (user torrent)
                 {
-                    echo "?w=" . $_GET["w"] . (!isset($_GET["o"]) || $_GET["o"] != "desc" ? "&c=dislikes&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "dislikes" ? "&c=dislikes&o=asc" : "&c=dislikes&o=desc")); 
+                    $user = clean_string($_GET["u"]);
+                    $word = clean_String($_GET["w"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
+                    }
                 }
-                else
+                else if(isset($_GET["u"])) // In search with u (user torrent)
                 {
-                    echo !isset($_GET["o"]) || $_GET["o"] != "desc" ? "?c=dislikes&o=desc" : ($_GET["o"] == "desc" &&  $_GET["c"] == "dislikes" ? "?c=dislikes&o=asc" : "?c=dislikes&o=desc"); 
+                    $user = clean_string($_GET["u"]);
+
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?u=" . $user . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?u=" . $user . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?u=" . $user . "&o=desc&c=" . $column;
+                    }
+                }
+                else if(isset($_GET["w"])) // In search
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?w=" . $word . "&o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?w=" . $word . "&o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?w=" . $word . "&o=desc&c=" . $column;
+                    }
+                }
+                else // In index
+                {
+                    if(isset($_GET["o"]) && isset($_GET["c"]))
+                    {
+                        if($_GET["o"] == "desc")
+                        {
+                            echo "?o=asc&c=" . $column;
+                        }
+                        else
+                        {
+                            echo "?o=desc&c=" . $column;
+                        }
+                    }
+                    else
+                    {
+                        echo "?o=desc&c=" . $column;
+                    }
                 }
             ?>">
         </a>

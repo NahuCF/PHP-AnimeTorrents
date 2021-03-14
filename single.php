@@ -27,11 +27,7 @@ if(isset($_GET["ID"]))
     }
 
     $statement = $conection->prepare("SELECT * FROM torrents WHERE ID = :ID LIMIT 1");
-    $statement->execute(
-        array(
-            "ID" => $torrent_id
-        )
-    );
+    $statement->execute(array("ID" => $torrent_id));
     $torrent = $statement->fetch();
 
     if(empty($torrent))
@@ -41,11 +37,7 @@ if(isset($_GET["ID"]))
     else
     {
         $statement = $conection->prepare("SELECT * FROM comments WHERE torrentID = :torrent_id");
-        $statement->execute(
-            array(
-                "torrent_id" => $torrent_id
-            )
-        );
+        $statement->execute(array("torrent_id" => $torrent_id));
         $comments = $statement->fetchAll();
     }
 }

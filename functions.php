@@ -39,46 +39,46 @@ function number_of_pages($torrents_per_page, $conection)
     return $number_of_pages;
 }
 
-///////////////////////////////////////////////////
-// THIS FUNCTIONS WILL ONLY BE USED IN INDEX.PHP //
-///////////////////////////////////////////////////
-
-function torrents_byColumn_indexDESC($torrents_per_page, $conection, $column)
+function torrents_byColumn_index($torrents_per_page, $conection, $order, $column)
 {
     $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column DESC LIMIT $begin, $torrents_per_page");
+
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column $order LIMIT $begin, $torrents_per_page");
     $statement->execute();
 
     return $torrents = $statement->fetchAll();
 }
 
-function torrents_byColumn_indexASC($torrents_per_page, $conection, $column)
+function torrents_byColumn_search($torrents_per_page, $conection, $word, $order, $column)
 {
     $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column ASC LIMIT $begin, $torrents_per_page");
-    $statement->execute();
-
-    return $torrents = $statement->fetchAll();
-}
-
-////////////////////////////////////////////////////
-// THIS FUNCTIONS WILL ONLY BE USED IN SEARCH.PHP //
-////////////////////////////////////////////////////
-
-function torrents_byColumn_searchDESC($torrents_per_page, $conection, $word, $column)
-{
-    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column DESC LIMIT $begin, $torrents_per_page");
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column $order LIMIT $begin, $torrents_per_page");
     $statement->execute(array("word" => "%$word%"));
 
     return $torrents = $statement->fetchAll();
 }
 
-function torrents_byColumn_searchASC($torrents_per_page, $conection, $word, $column)
+// Function to get the torrents of a especific user
+function user_torrents_search($torrents_per_page, $conection, $word, $column, $order, $user_name)
 {
     $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column ASC LIMIT $begin, $torrents_per_page");
-    $statement->execute(array("word" => "%$word%"));
+
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word and torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $torrents_per_page");
+    $statement->execute(
+        array(
+            "word" => "%$word%",
+            "user_name" => $user_name
+        )
+    );
+
+    return $torrents = $statement->fetchAll();
+}
+
+function torrents_byColumn_torrents($torrents_per_page, $conection, $column, $order, $user_name)
+{
+    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $torrents_per_page");
+    $statement->execute(array("user_name" => $user_name));
 
     return $torrents = $statement->fetchAll();
 }
@@ -131,11 +131,16 @@ function retrive_comment_date($comment)
 {
     $time = time() - strtotime($comment["date"]) - 18000; 
 
+    $days = date("d", $time) - 1;
     $hours = date("H", $time);
     $minutes = date("i", $time);
     $secs = date("s", $time);
-
-    if($hours >= 1)
+    
+    if($days >= 1)
+    {
+        return $days . " days " . $hours . " hours " . $minutes . " minutes " . $secs . " seconds ago";
+    }
+    else if($hours >= 1)
     {
         return $hours . " hours " . $minutes . " minutes " . $secs . " seconds ago";
     }
