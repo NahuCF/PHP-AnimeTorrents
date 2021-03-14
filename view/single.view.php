@@ -70,7 +70,7 @@
                     </a>
                 <?php endif; ?>
             </div>
-        </div>
+        </div>  
 
         <div class="singlemiddle-container">
             <?php if(empty($torrent["description"])): ?>
@@ -85,18 +85,19 @@
                 <h3><?php echo "Comments - " . sizeof($comments); ?></h3>
             </div>
             <div class="wrap-container">
-                <?php foreach($comments as $comment): ?>
-                    <div class="comment">
+                <?php $comments_size = sizeof($comments)?>
+                <?php for($i = 0; $i < $comments_size; $i++): ?>
+                    <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
                         <div class="comment-photo">
-                            <div class="comment-user"><a href="<?php echo "user_torrents.php?=" . $comment["commentOwnerID"]; ?>"><?php echo $comment["commentOwnerName"]; ?></a></div>
+                            <div class="comment-user"><a href="<?php echo "torrents.php?=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
                             <img src="imgs/default.png" alt="avatar">
                         </div>
                         <div class="comment-container">
-                            <div><?php echo retrive_comment_date($comment); ?></div>
-                            <div class="comment-text"><?php echo $comment["comment"]; ?></div>
+                            <div><a href="<?php echo "#com-" . $i + 1 ?>"><?php echo retrive_comment_date($comments[$i]); ?></a></div>
+                            <div class="comment-text"><?php echo $comments[$i]["comment"]; ?></div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                <?php endfor; ?>
 
                 <?php if(isset($_SESSION["user"])): ?>
                     <form class="comment__form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST">
