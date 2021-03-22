@@ -13,7 +13,7 @@
     <title>Upload</title>
 </head>
 <body>
-    <?php require "user-header.php"; ?>
+    <?php require "header.php"; ?>
 
     <div class="wrap upload">
         <div class="top">

@@ -11,11 +11,7 @@
     <title>Animu</title>
 </head>
 <body>
-    <?php if(isset($_SESSION["user"])): ?>
-        <?php require "user-header.php"; ?>
-    <?php else: ?>
-        <?php require "header.php"; ?>
-    <?php endif; ?>
+    <?php require "header.php"; ?>
         
     <div class="wrap profile">
         <h2>Profile of <strong>NahuCF</strong></h2>

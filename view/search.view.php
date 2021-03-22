@@ -11,11 +11,7 @@
     <title>Animu</title>
 </head>
 <body>
-    <?php if(isset($_SESSION["user"])): ?>
-        <?php require "user-header.php"; ?>
-    <?php else: ?>
-        <?php require "header.php"; ?>
-    <?php endif; ?>
+    <?php require "header.php"; ?>
     
     <?php if(!empty($error)): ?>
         <div class="wrap">
