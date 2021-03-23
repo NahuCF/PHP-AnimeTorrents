@@ -1,5 +1,5 @@
 <header>
-    <a href="index.php">asd</a>
+    <a href="index.php">Inicio</a>
     <?php if(isset($_SESSION["user"])): ?>
         <a href="upload.php">UPLOAD</a>
     <?php endif; ?>
