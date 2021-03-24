@@ -35,6 +35,14 @@ if(isset($_GET["c"]) && isset($_GET["o"]))
     {
         $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "ASC", "likes");
     }
+    elseif($_GET["c"] == "dislikes" && $_GET["o"] == "desc")
+    {
+        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "DESC", "dislikes");
+    }
+    elseif($_GET["c"] == "dislikes" && $_GET["o"] == "asc")
+    {
+        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "ASC", "dislikes");
+    }  
 }
 else
 {

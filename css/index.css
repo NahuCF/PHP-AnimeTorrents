@@ -778,7 +778,6 @@ input::placeholder {
 
     display: flex;
     align-items: center;
-    height: 42px;
 
     border-radius: 4px 4px 0px 0px;
 }

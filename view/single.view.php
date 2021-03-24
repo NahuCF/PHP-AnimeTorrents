@@ -40,7 +40,7 @@
                     </div>
                     <div class="center-container__row">
                         <div class="center_container__left">Likes: </div>
-                        <div syle="color: green;"><?php echo $torrent["likes"]; ?></div>
+                        <div style="color: green;"><?php echo $torrent["likes"]; ?></div>
                     </div>
                     <div class="center-container__row">
                         <div class="center_container__left">Dislikes: </div>
@@ -80,7 +80,7 @@
             <div class="comments-container__top">
                 <h3><?php echo "Comments - " . sizeof($comments); ?></h3>
             </div>
-            
+
             <?php if(!empty($comments)): ?>
                 <div class="wrap-container">
                     <?php $comments_size = sizeof($comments)?>
