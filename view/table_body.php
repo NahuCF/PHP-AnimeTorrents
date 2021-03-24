@@ -13,8 +13,8 @@
             </td>
             <td class="text-center hide"><?php echo bytes_to_string($torrent["size"]); ?></td>
             <td class="text-center hide"><?php echo date('Y-m-d H:i', strtotime($torrent["date"])); ?></td>
-            <td class="text-center"><?php echo $torrent["likes"]; ?></td>
-            <td class="text-center"><?php echo $torrent["dislikes"]; ?></td>
+            <td class="text-center" style="color: green;"><?php echo $torrent["likes"]; ?></td>
+            <td class="text-center" style="color: red;"><?php echo $torrent["dislikes"]; ?></td>
         </tr>
     <?php else: ?>
         <tr class="row__table row__table-white">
@@ -29,8 +29,8 @@
             </td>
             <td class="text-center hide"><?php echo bytes_to_string($torrent["size"]); ?></td>
             <td class="text-center hide"><?php echo date('Y-m-d H:i', strtotime($torrent["date"])); ?></td>
-            <td class="text-center"><?php echo $torrent["likes"]; ?></td>
-            <td class="text-center"><?php echo $torrent["dislikes"]; ?></td>
+            <td class="text-center" style="color: green;"><?php echo $torrent["likes"]; ?></td>
+            <td class="text-center" style="color: red;"><?php echo $torrent["dislikes"]; ?></td>
         </tr>
     <?php endif; ?>
 

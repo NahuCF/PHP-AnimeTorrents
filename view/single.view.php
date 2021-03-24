@@ -40,11 +40,11 @@
                     </div>
                     <div class="center-container__row">
                         <div class="center_container__left">Likes: </div>
-                        <div><?php echo $torrent["likes"]; ?></div>
+                        <div syle="color: green;"><?php echo $torrent["likes"]; ?></div>
                     </div>
                     <div class="center-container__row">
                         <div class="center_container__left">Dislikes: </div>
-                        <div><?php echo $torrent["dislikes"]; ?></div>
+                        <div style="color: red;"><?php echo $torrent["dislikes"]; ?></div>
                     </div>
                 </div>
             </div> 
@@ -80,29 +80,32 @@
             <div class="comments-container__top">
                 <h3><?php echo "Comments - " . sizeof($comments); ?></h3>
             </div>
-            <div class="wrap-container">
-                <?php $comments_size = sizeof($comments)?>
-                <?php for($i = 0; $i < $comments_size; $i++): ?>
-                    <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
-                        <div class="comment-photo">
-                            <div class="comment-user"><a href="<?php echo "torrents.php?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
-                            <img src="imgs/default.png" alt="avatar">
+            
+            <?php if(!empty($comments)): ?>
+                <div class="wrap-container">
+                    <?php $comments_size = sizeof($comments)?>
+                    <?php for($i = 0; $i < $comments_size; $i++): ?>
+                        <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
+                            <div class="comment-photo">
+                                <div class="comment-user"><a href="<?php echo "torrents.php?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
+                                <img src="imgs/default.png" alt="avatar">
+                            </div>
+                            <div class="comment-container">
+                                <div><a href="<?php echo "#com-" . $i + 1 ?>"><?php echo retrive_comment_date($comments[$i]); ?></a></div>
+                                <div class="comment-text"><?php echo $comments[$i]["comment"]; ?></div>
+                            </div>
                         </div>
-                        <div class="comment-container">
-                            <div><a href="<?php echo "#com-" . $i + 1 ?>"><?php echo retrive_comment_date($comments[$i]); ?></a></div>
-                            <div class="comment-text"><?php echo $comments[$i]["comment"]; ?></div>
-                        </div>
-                    </div>
-                <?php endfor; ?>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
 
-                <?php if(isset($_SESSION["user"])): ?>
-                    <form class="comment__form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST">
-                        <label for="comment">Make a comment</label>
-                        <textarea name="comment" id="comment"></textarea>
-                        <button class="comment__form-button" type="submit">Submit</button>
-                    </form>
-                <?php endif; ?>
-            </div>
+            <?php if(isset($_SESSION["user"])): ?>
+                <form class="comment__form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST">
+                    <label for="comment">Make a comment</label>
+                    <textarea name="comment" id="comment"></textarea>
+                    <button class="comment__form-button" type="submit">Submit</button>
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 

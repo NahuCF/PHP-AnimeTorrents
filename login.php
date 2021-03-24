@@ -31,6 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         {
             $_SESSION["user"] = $user;
             $_SESSION["userID"] = $result["ID"];
+            $_SESSION["userType"] = $result["userType"];
         }
 
         if(empty($result["user"]) || empty($result["password"]))
