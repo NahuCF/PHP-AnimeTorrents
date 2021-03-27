@@ -54,7 +54,6 @@ ul, li {
 }
 
 .user__type:hover {
-    background-color: #080808;
     color: white;
 }
 
@@ -72,8 +71,15 @@ ul, li {
     border-radius: 0px 0px 4px 4px;
     background-color: white;
     box-shadow: -1px 4px 36px -9px rgba(0,0,0,0.75);
+}
 
-    pointer-events: none;
+.user__type--active {
+    background-color: #080808;
+    color: white;
+}
+
+.sub-menu--active {
+    display: block;
 }
 
 .sub__menu li a {
@@ -899,6 +905,7 @@ input::placeholder {
     }
 
     .header-bottom-container {
+        display: none;
         flex-direction: column;
         align-items: unset;
         width: 100%;
@@ -916,13 +923,12 @@ input::placeholder {
     .header-bottom-container div:first-child {
         padding: 15px;
     }
-
-    .user__type:hover {
-        background-color: unset;
+    
+    .header-bottom-container--active {
+        display: flex;
     }
 
     .sub__menu {
-        display: none;
         position: unset;
 
         padding-bottom: 15px;

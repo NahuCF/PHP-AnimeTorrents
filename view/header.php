@@ -35,7 +35,7 @@
                         <?php endif; ?>
                         <i class="fas fa-caret-down"></i>
                     </a>
-                    <ul class="sub__menu" id="sub__menu" style="display: none;">
+                    <ul class="sub__menu" id="sub__menu">
                         <?php if(isset($_SESSION["user"])): ?>
                             <li>
                                 <a href="profile.php">
