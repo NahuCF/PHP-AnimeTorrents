@@ -16,7 +16,12 @@
     <div class="single-wrap">
         <div class="singletop-container">
             <div class="top">
-                <h3><?php echo $torrent["name"]; ?></h3>
+                <h3>
+                    <?php if($_SESSION["user"] == $torrent["torrentOwnerName"]):?>
+                        <a href="<?php echo "edit.php?t=" . $torrent["ID"]?>" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
+                    <?php endif; ?>
+                    <?php echo $torrent["name"]; ?>
+                </h3>
             </div>
             <div class="center">
                 <div class="center-container">

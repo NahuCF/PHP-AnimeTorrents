@@ -47,8 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     "description" => $file_description
                 )
             );  
-        
-        header("Location: index.php");
+        echo sha1($file_data);
+        //header("Location: index.php");
     }
 }
 

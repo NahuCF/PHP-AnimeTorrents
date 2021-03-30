@@ -24,6 +24,12 @@ tr > th {
     border-bottom-width: 2px;
 }
 
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
 tbody tr:nth-child(odd) {
     background-color: #F9F9F9;
 }
@@ -318,7 +324,7 @@ tr {
 
 .wrap {
     max-width: 1200px;
-    padding: 0px 20px;
+    padding: 0px 20px 20px 20px;
     margin: 20px auto auto;
 }
 
@@ -794,6 +800,68 @@ input::placeholder {
 
 .profile__form-email {
     display: none;
+}
+
+/* edit.php */
+
+#torrentID-edit{
+    color: #337ab7;
+    font-size: 36px;
+}
+
+#torrentID-edit:hover {
+    color: #23527C;
+}
+
+.danger-panel {
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #ebccd1;
+}
+
+.danger-panel > div:first-child {
+    padding: 7px 15px;
+    border-bottom: 1px solid #ebccd1;
+    background-color: #F2DEDE;
+}
+
+.danger-panel > div:first-child h3 {
+    color: #a94442;
+    font-size: 16px;
+}
+
+.danger-panel__container {
+    padding: 24px 15px;
+}
+
+.danger-panel__container div:first-child {
+    width: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    margin-bottom: 20px;
+}
+
+.danger-panel__container div:first-child p {
+    font-size: 21px;
+}
+
+.danger-panel__btn {
+    color: white;
+
+    padding: 6px 12px;
+
+    border-radius: 4px;
+    border: 1px solid transparent;
+    border-color: #d43f3a;
+    background-color: #d9534f;
+}
+
+.danger-panel__btn:hover {
+    cursor: pointer;
+    background-color: #C9302C;
 }
 
 @media (max-width: 1200px) {
