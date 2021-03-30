@@ -416,7 +416,7 @@ input::placeholder {
 }
 
 .browse_contenedor {
-    display: table;
+    display: flex;
     margin-bottom: 10px;
 }
 
@@ -430,13 +430,9 @@ input::placeholder {
 }
 
 .btn__browse {
-    width: 1%;
-
-    display: table-cell;
+    display: flex;
     align-items: center;
-
     border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .btn__browse:hover {
@@ -456,7 +452,6 @@ input::placeholder {
     width: 100%;
     max-width: 100%;
 
-    display: table-cell;
     border-radius: 0px 4px 4px 0px;
     color: #555555;
     background-color: #EEEEEE;
@@ -518,12 +513,10 @@ input::placeholder {
 }
 
 .pagination {
-    font-size: 0;
-    display: inline-block;
+    display: flex;
 }
 
 .pagination li {
-    display: inline-block;
     color: #337AB7;
 }
 
