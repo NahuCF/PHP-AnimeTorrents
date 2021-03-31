@@ -5,7 +5,7 @@ require "functions.php";
 
 if(isset($_SESSION["user"]))
 {
-    header("Location: index.php");
+    header("Location: index");
 }
 
 $error = "";
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         }
         else
         {
-            header ("Location: index.php");
+            header ("Location: index");
         }
     }
     else

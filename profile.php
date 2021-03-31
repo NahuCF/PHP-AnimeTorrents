@@ -5,13 +5,13 @@ require "functions.php";
 
 if(!isset($_SESSION["user"]))
 {
-    header("Location: index.php");
+    header("Location: index");
 }
 
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
-    header("Location: error.php");
+    header("Location: error");
 }
 
 $statement = $conection->prepare("SELECT * FROM users WHERE id = :user_id LIMIT 1");
@@ -37,15 +37,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["updatebtn_password"]))
     {
         $password_error = "Obligatory field.";
     }
-    elseif($password != $password_confirm && strlen($password) < 6 || strlen($password) > 20 && strlen($password_confirm) < 6 || strlen($password_confirm) > 20)
+    else if($password != $password_confirm && strlen($password) < 6 || strlen($password) > 20 && strlen($password_confirm) < 6 || strlen($password_confirm) > 20)
     {
         $password_error_list = "<li> Passwords must match. </li> <li> Password must be between 6 and 20 characters long.";
     }
-    elseif(strlen($password) < 6 || strlen($password) > 20 && strlen($password_confirm) < 6 || strlen($password_confirm) > 20)
+    else if(strlen($password) < 6 || strlen($password) > 20 && strlen($password_confirm) < 6 || strlen($password_confirm) > 20)
     {
         $password_error = "Password must be between 6 and 20 characters long.";
     }
-    elseif($password != $password_confirm)
+    else if($password != $password_confirm)
     {
         $password_error = "Passwords must match.";
     }

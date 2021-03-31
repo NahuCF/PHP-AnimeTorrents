@@ -5,13 +5,13 @@ require "functions.php";
 
 if(!isset($_SESSION["user"]))
 {
-    header("Location: index.php");
+    header("Location: index");
 }
 
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
-    header("Location: error.php");
+    header("Location: error");
 }
 
 $error = "";
@@ -47,8 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     "description" => $file_description
                 )
             );  
-        echo sha1($file_data);
-        //header("Location: index.php");
+            
+        header("Location: index");
     }
 }
 

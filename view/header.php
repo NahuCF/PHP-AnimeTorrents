@@ -1,6 +1,6 @@
 <header>
     <div class="header-top">
-        <a style="font-size: 18px;" href="index.php">Nyaa Copy</a>
+        <a style="font-size: 18px;" href="index">Nyaa Copy</a>
         <button id="hamburger-btn">
             <span></span>
             <span></span>
@@ -10,11 +10,11 @@
 
     <div class="header-bottom-container" id="header-bottom-container">
         <?php if(isset($_SESSION["user"])): ?>
-            <div><a href="upload.php">Upload</a></div>
+            <div><a href="upload">Upload</a></div>
         <?php endif; ?>
 
         <div class="header-bottom">
-            <form class="form-header" action="search.php" method="GET">
+            <form class="form-header" action="search" method="GET">
                 <?php if(isset($_GET["u"])): ?>
                     <input name="u" value="<?php echo clean_string($_GET['u']); ?>" style="pointer-events: none; display: none" type="text">
                 <?php endif; ?>
@@ -38,26 +38,26 @@
                     <ul class="sub__menu" id="sub__menu">
                         <?php if(isset($_SESSION["user"])): ?>
                             <li>
-                                <a href="profile.php">
+                                <a href="profile">
                                     <i class="fas fa-cog"></i>
                                     Profile
                                 </a>
                             </li>
                             <li>
-                                <a href="logout.php">
+                                <a href="logout">
                                     <i class="fa fa-times fa-fw"></i>
                                     Logout
                                 </a>
                             </li>
                         <?php else: ?>
                             <li>
-                                <a href="login.php">
+                                <a href="login">
                                     <i class="fas fa-sign-in-alt"></i>
                                     Login
                                 </a>
                             </li>
                             <li>
-                                <a href="register.php">
+                                <a href="register">
                                     <i class="fas fa-pencil-alt"></i>
                                     Register
                                 </a>

@@ -6,7 +6,7 @@ require "functions.php";
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
-    header("Location: error.php");
+    header("Location: error");
 }
 
 $error = "";
@@ -91,7 +91,7 @@ else if(isset($_GET["w"])) // Search without u
 }
 else
 {
-    header("Location: index.php");
+    header("Location: index");
 }
 
 require "view/search.view.php"

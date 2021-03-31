@@ -6,7 +6,7 @@ require "functions.php";
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
-    header("Location: error.php");
+    header("Location: error");
 }
 
 if(isset($_GET["ID"]))
@@ -32,7 +32,7 @@ if(isset($_GET["ID"]))
 
     if(empty($torrent))
     {
-        header("Location: index.php");
+        header("Location: index");
     }
     else
     {
@@ -43,7 +43,7 @@ if(isset($_GET["ID"]))
 }
 else
 {
-    header("Location: index.php");
+    header("Location: index");
 }
 
 require "view/single.view.php";

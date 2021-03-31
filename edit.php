@@ -6,7 +6,7 @@ require "functions.php";
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
-    header("Location: error.php");
+    header("Location: error");
 }
 
 if(isset($_GET["t"]))
@@ -40,18 +40,18 @@ if(isset($_GET["t"]))
                 $statement = $conection->prepare("DELETE FROM torrents WHERE ID = :torrent_id LIMIT 1");
                 $statement->execute(array("torrent_id" => $torrent["ID"]));
 
-                header("Location: index.php");
+                header("Location: index");
             }
         }
     }
     else
     {
-        header("Location: index.php");
+        header("Location: index");
     }
 }
 else
 {
-    header("Location: index.php");
+    header("Location: index");
 }
 
 require "view/edit.view.php";
