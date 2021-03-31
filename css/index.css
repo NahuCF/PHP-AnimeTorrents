@@ -896,9 +896,13 @@ input::placeholder {
     .first__list {
         margin-left: 0;
     }
-    
+
     .upload__form .optional {
         flex-direction: column;
+    }
+
+    .header-bottom-container div:first-child {
+        padding: 0;
     }
 
     .upload__form .optional div:nth-child(1) {
@@ -990,10 +994,6 @@ input::placeholder {
         width: 100%;
         border-radius: 4px;
     }
-
-    .header-bottom-container div:first-child {
-        padding: 15px;
-    }
     
     .header-bottom-container--active {
         display: flex;
@@ -1022,6 +1022,12 @@ input::placeholder {
     .sub__menu li a:hover {
         background-color: unset;
         color: white;
+    }
+
+    .user__type--active {
+        width: 100%;
+        padding: 13px 16px;
+        text-align: left;
     }
 }
 

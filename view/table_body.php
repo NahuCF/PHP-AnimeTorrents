@@ -1,6 +1,6 @@
 <?php foreach($torrents as $torrent): ?>
     <tr class="row__table">
-        <td class="colaps"><a href="<?php echo "single.php" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"]; ?></a></td>
+        <td class="colaps"><a href="<?php echo "single" . "?ID=" . $torrent["ID"]; ?>"><?php echo $torrent["name"]; ?></a></td>
         <td class="text-center">
             <a href="<?php echo "dowload.php?f=" . $torrent["ID"]; ?>"><i class="fas fa-download"></i></a>
             <?php if(!empty($torrent["magnet"])): ?>

@@ -17,8 +17,8 @@
         <div class="singletop-container">
             <div class="top">
                 <h3>
-                    <?php if($_SESSION["user"] == $torrent["torrentOwnerName"]):?>
-                        <a href="<?php echo "edit.php?t=" . $torrent["ID"]?>" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
+                    <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $torrent["torrentOwnerName"]):?>
+                        <a href="<?php echo "edit?t=" . $torrent["ID"]?>" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
                     <?php endif; ?>
                     <?php echo $torrent["name"]; ?>
                 </h3>
@@ -27,7 +27,7 @@
                 <div class="center-container">
                     <div class="center-container__row">
                         <div class="center_container__left">Submitter: </div>
-                        <div><a href="<?php echo "torrents.php?u=" . $torrent["torrentOwnerName"]; ?>"><?php echo $torrent["torrentOwnerName"]; ?></a></div>
+                        <div><a href="<?php echo "torrents?u=" . $torrent["torrentOwnerName"]; ?>"><?php echo $torrent["torrentOwnerName"]; ?></a></div>
                     </div>
                     <div class="center-container__row">
                         <div class="center_container__left">Information: </div>
@@ -54,7 +54,7 @@
                 </div>
             </div> 
             <div class="bottom">
-                <a href="<?php echo "dowload.php?f=" . $torrent["ID"]; ?>">
+                <a href="<?php echo "dowload?f=" . $torrent["ID"]; ?>">
                     <i class="fas fa-download"></i>
                     Dowload Torrent
                 </a>
@@ -92,7 +92,7 @@
                     <?php for($i = 0; $i < $comments_size; $i++): ?>
                         <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
                             <div class="comment-photo">
-                                <div class="comment-user"><a href="<?php echo "torrents.php?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
+                                <div class="comment-user"><a href="<?php echo "torrents?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
                                 <img src="imgs/default.png" alt="avatar">
                             </div>
                             <div class="comment-container">
