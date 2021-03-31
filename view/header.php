@@ -26,7 +26,7 @@
 
             <ul class="user__list">
                 <li class="first__list">
-                    <a class="user__type" id="user__type" href="#">
+                    <button class="user__type" id="user__type" href="#">
                         <i class="far fa-user"></i>
                         <?php if(isset($_SESSION["user"])): ?>
                             <?php echo $_SESSION["user"]; ?>
@@ -34,7 +34,7 @@
                             <?php echo "Guest" ?>
                         <?php endif; ?>
                         <i class="fas fa-caret-down"></i>
-                    </a>
+                    </button>
                     <ul class="sub__menu" id="sub__menu">
                         <?php if(isset($_SESSION["user"])): ?>
                             <li>

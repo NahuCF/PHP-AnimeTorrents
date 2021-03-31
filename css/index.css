@@ -50,6 +50,7 @@ ul, li {
 
 .first__list {
     position: relative;
+    margin-left: 15px;
 }
 
 .user__type {
@@ -57,6 +58,11 @@ ul, li {
     display: block;
 
     color: #9D9D9D;
+
+    border: 0 solid transparent;
+    border-radius: 0;
+    outline: none;
+    background-color: #222222;
 }
 
 .user__type:hover {
@@ -887,6 +893,10 @@ input::placeholder {
 }
 
 @media (max-width: 768px) {
+    .first__list {
+        margin-left: 0;
+    }
+    
     .upload__form .optional {
         flex-direction: column;
     }
