@@ -20,7 +20,7 @@
     <?php else: ?>
         <div class="wraper">
             <?php if(isset($_GET["u"])): ?>
-                <h3><?php echo "Browsing " . clean_string($_GET["u"]) . "' torrents (" . sizeof($torrents) . ")"; ?></h3>
+                <h3><?php echo "Browsing " . clean_string($_GET["u"]) . "' torrents (" . sizeof($rows) . ")"; ?></h3>
             <?php endif; ?>
             <table>
                 <thead>

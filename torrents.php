@@ -11,43 +11,53 @@ if(!$conection)
 
 if(isset($_GET["u"]))
 {
-    $user_name = clean_string($_GET["u"]);
+    $user_name = clean_string($_GET["u"]); // Variable to show the owner of the torrents
+
+    if(isset($_GET["w"]))
+    {
+        if(isset($_GET["c"]) && isset($_GET["o"]))
+        {
+            check_o_and_c("index");
+
+            $optional = array(
+                "order" => clean_string($_GET["o"]), 
+                "column" => clean_string($_GET["c"]),
+                "word" => clean_string($_GET["w"]),
+                "user_name" => $user_name
+            );
+            $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
+        }
+        else
+        {
+            $optional = array(
+                "order" => "DESC", 
+                "column" => "date",
+                "word" => clean_string($_GET["w"]),
+                "user_name" => $user_name
+            );
+            $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
+        }
+    }
+    else if(isset($_GET["c"]) && isset($_GET["o"]))
+    {
+        check_o_and_c("index");
+
+        $optional = array(
+            "order" => clean_string($_GET["o"]), 
+            "column" => clean_string($_GET["c"]),
+            "user_name" => $user_name
+        );
+        $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
+    }
+    else
+    {
+        $optional = array("order" => "DESC", "column" => "date", "user_name" => $user_name);
+        $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
+    }
 }
 else
 {
     header("Location: index");
-}
-
-if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"]))
-{
-    if($_GET["c"] == "size" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "date", "DESC", $user_name);
-    }
-    elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "size", "ASC", $user_name);
-    }
-    elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "date", "DESC", $user_name);
-    }
-    elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "date", "ASC", $user_name);
-    }
-    elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "likes", "DESC",$user_name);
-    }
-    elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "likes", "ASC", $user_name);
-    }
-}
-else
-{
-    $torrents = torrents_byColumn_torrents($page_config["torrents_per_page"], $conection, "date", "DESC", $user_name);
 }
 
 require "view/torrents.view.php";

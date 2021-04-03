@@ -11,42 +11,18 @@ if(!$conection)
 
 if(isset($_GET["c"]) && isset($_GET["o"]))
 {
-    if($_GET["c"] == "size" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "DESC", "size");
-    }
-    elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "ASC", "size");
-    }
-    elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "DESC", "date");
-    }
-    elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "ASC", "date");
-    }
-    elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "DESC", "likes");
-    }
-    elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "ASC", "likes");
-    }
-    elseif($_GET["c"] == "dislikes" && $_GET["o"] == "desc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "DESC", "dislikes");
-    }
-    elseif($_GET["c"] == "dislikes" && $_GET["o"] == "asc")
-    {
-        $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "ASC", "dislikes");
-    }  
+    check_o_and_c("index");
+
+    $optional = array(
+        "order" => clean_string($_GET["o"]), 
+        "column" => clean_string($_GET["c"])
+    );
+    $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
 }
 else
-{
-    $torrents = torrents_byColumn_index($page_config["torrents_per_page"], $conection, "DESC", "date");
+{   
+    $optional = array("order" => "DESC", "column" => "date");
+    $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
 }
 
 require "view/index.view.php";

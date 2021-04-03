@@ -11,80 +11,28 @@ if(!$conection)
 
 $error = "";
 
-if(isset($_GET["u"]) && isset($_GET["w"])) // Using a word to find torrent of a user
+if(isset($_GET["w"]))
 {
-    $user_name = clean_string($_GET["u"]);
-    $word = clean_string($_GET["w"]);
+    $word = clean_string($_GET["w"]); // Needed for the table_head
 
     if(isset($_GET["c"]) && isset($_GET["o"]))
     {
-        if($_GET["c"] == "size" && $_GET["o"] == "desc")
-        {
-            $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "size", "DESC", $user_name);
-        }
-        elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
-        {
-            $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "size", "ASC", $user_name);
-        }
-        elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
-        {
-            $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "date", "DESC", $user_name);
-        }
-        elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
-        {
-            $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "date", "ASC", $user_name);
-        }
-        elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
-        {
-            $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "likes", "DESC", $user_name);
-        }
-        elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
-        {
-            $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "likes", "ASC", $user_name);
-        }
+        check_o_and_c("index");
+
+        $optional = array(
+            "order" => clean_string($_GET["o"]), 
+            "column" => clean_string($_GET["c"]),
+            "word" => $word
+        );
+        $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
     }
     else
     {
-        $torrents = user_torrents_search($page_config["torrents_per_page"], $conection, $word, "date", "DESC", $user_name);
-    }
-}
-else if(isset($_GET["w"])) // Search without u
-{
-    $word = clean_string($_GET["w"]);
-
-    if(isset($_GET["c"]) && isset($_GET["o"]))
-    {
-        if($_GET["c"] == "size" && $_GET["o"] == "desc")
-        {
-            $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "DESC", "size");
-        }
-        elseif($_GET["c"] == "size" && $_GET["o"] == "asc")
-        {
-            $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "ASC", "size");
-        }
-        elseif($_GET["c"] == "date" && $_GET["o"] == "desc")
-        {
-            $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "DESC", "date");
-        }
-        elseif($_GET["c"] == "date" && $_GET["o"] == "asc")
-        {
-            $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "ASC", "date");
-        }
-        elseif($_GET["c"] == "likes" && $_GET["o"] == "desc")
-        {
-            $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "DESC","likes");
-        }
-        elseif($_GET["c"] == "likes" && $_GET["o"] == "asc")
-        {
-            $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "ASC", "likes");
-        }
-    }
-    else
-    {
-        $torrents = torrents_byColumn_search($page_config["torrents_per_page"], $conection, $word, "DESC", "date");
+        $optional = array("order" => "DESC", "column" => "date", "word" => $word);
+        $rows = get_rows($page_config["rows_per_page"], "torrents", $conection, $optional);
     }
 
-    if(empty($torrents))
+    if(empty($rows))
     {
         $error = "No results found";
     }

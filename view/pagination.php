@@ -1,4 +1,4 @@
-<?php $total_pages = number_of_pages($page_config["torrents_per_page"], $conection); ?>
+<?php $total_pages = number_of_pages($page_config["rows_per_page"], $conection); ?>
 <ul class="pagination">
     
     <?php if(get_page() <= 1): ?>
@@ -6,21 +6,25 @@
     <?php else: ?>
         <li>
             <a id="left__aquo-enabled" href="<?php 
-                if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) // In search with u, w set and orders
+                if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) // In torrents with w set and orders
                 {
                     echo "?u=" . $_GET["u"] . "&c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() - 1 . "&w=" . $_GET["w"];
                 }
-                else if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"])) // In search with u
+                else if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"])) // In torrents with orders
                 {
                     echo "?u=" . $_GET["u"] . "&c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() - 1;
                 }
-                else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) // In search
-                {
-                    echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() - 1 . "&w=" . $_GET["w"];
-                }
-                else if(isset($_GET["u"]) && isset($_GET["w"])) // In search with u and w
+                else if(isset($_GET["u"]) && isset($_GET["w"])) // In torrents with w
                 {
                     echo "?u=" . $_GET["u"] . "&p=" . get_page() - 1 . "&w=" . $_GET["w"];
+                }
+                else if(isset($_GET["u"])) // In torrents
+                {
+                    echo "?u=" . $_GET["u"] . "&p=" . get_page() - 1;
+                }
+                else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) // In search with orders
+                {
+                    echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() - 1 . "&w=" . $_GET["w"];
                 }
                 else if(isset($_GET["w"])) // In search
                 {
@@ -29,10 +33,6 @@
                 else if(isset($_GET["c"]) && isset($_GET["o"]))  // In index with orders
                 {
                     echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() - 1;
-                }
-                else if(isset($_GET["u"])) // In u search without w (user torrents)
-                {
-                    echo "?u=" . $_GET["u"] . "&p=" . get_page();
                 }
                 else  // In index
                 {
@@ -46,33 +46,33 @@
         <?php if(get_page() == $i): ?>
             <li class="active">
                 <a href="<?php 
-                    if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) 
+                    if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) // In torrents with w set and orders
                     {
                         echo "?u=" . $_GET["u"] . "&c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() . "&w=" . $_GET["w"];
                     }
-                    else if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"])) 
+                    else if(isset($_GET["u"]) && isset($_GET["c"]) && isset($_GET["o"])) // In torrents with orders
                     {
                         echo "?u=" . $_GET["u"] . "&c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page();
                     }
-                    else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"]))
-                    {
-                        echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() . "&w=" . $_GET["w"];
-                    }
-                    else if(isset($_GET["u"]) && isset($_GET["w"])) 
+                    else if(isset($_GET["u"]) && isset($_GET["w"]))  // In torrents with w
                     {
                         echo "?u=" . $_GET["u"] . "&p=" . get_page() . "&w=" . $_GET["w"];
                     }
-                    else if(isset($_GET["w"]))
+                    else if(isset($_GET["u"]))  // In torrents
+                    {
+                        echo "?u=" . $_GET["u"] . "&p=" . get_page();
+                    }
+                    else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"])) //In search with orders
+                    {
+                        echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() . "&w=" . $_GET["w"];
+                    }
+                    else if(isset($_GET["w"]))  //In search
                     {
                         echo "?p=" . get_page() . "&w=" . $_GET["w"];
                     }
                     else if(isset($_GET["c"]) && isset($_GET["o"]))
                     {
                         echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() ;
-                    }
-                    else if(isset($_GET["u"]))
-                    {
-                        echo "?u=" . $_GET["u"] . "&p=" . get_page();
                     }
                     else
                     {
@@ -91,13 +91,17 @@
                     {
                         echo "?u=" . $_GET["u"] . "&c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . $i;
                     }
-                    else if(isset($_GET["w"]) && isset($_GET["c"]) && isset($_GET["o"]))
-                    {
-                        echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . $i . "&w=" . $_GET["w"];
-                    }
                     else if(isset($_GET["u"]) && isset($_GET["w"])) 
                     {
                         echo "?u=" . $_GET["u"] . "&p=" . $i . "&w=" . $_GET["w"];
+                    }
+                    else if(isset($_GET["u"]))
+                    {
+                        echo "?u=" . $_GET["u"] . "&p=" . $i;
+                    }
+                    else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"]))
+                    {
+                        echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . $i . "&w=" . $_GET["w"];
                     }
                     else if(isset($_GET["w"]))
                     {
@@ -106,10 +110,6 @@
                     else if(isset($_GET["c"]) && isset($_GET["o"]))
                     {
                         echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . $i;
-                    }
-                    else if(isset($_GET["u"]))
-                    {
-                        echo "?u=" . $_GET["u"] . "&p=" . $i;
                     }
                     else
                     {
@@ -133,13 +133,17 @@
                 {
                     echo "?u=" . $_GET["u"] . "&c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() + 1;
                 }
-                else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"]))
-                {
-                    echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() + 1 . "&w=" . $_GET["w"];
-                }
                 else if(isset($_GET["u"]) && isset($_GET["w"]))
                 {
                     echo "?u=" . $_GET["u"] . "&p=" . get_page() + 1 . "&w=" . $_GET["w"];
+                }
+                else if(isset($_GET["u"]))
+                {
+                    echo "?u=" . $_GET["u"] . "&p=" . get_page() + 1;
+                }
+                else if(isset($_GET["c"]) && isset($_GET["o"]) && isset($_GET["w"]))  // In search with orders
+                {
+                    echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() + 1 . "&w=" . $_GET["w"];
                 }
                 else if(isset($_GET["w"]))
                 {
@@ -148,10 +152,6 @@
                 else if(isset($_GET["c"]) && isset($_GET["o"]))
                 {
                     echo "?c=" . $_GET["c"] . "&o=" . $_GET["o"] . "&p=" . get_page() + 1;
-                }
-                else if(isset($_GET["u"]))
-                {
-                    echo "?u=" . $_GET["u"] . "&p=" . get_page() + 1;
                 }
                 else
                 {

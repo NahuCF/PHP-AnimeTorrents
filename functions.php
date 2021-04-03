@@ -28,59 +28,80 @@ function clean_string($word)
 }
 
 // This function will only be uses in pagination.php // 
-function number_of_pages($torrents_per_page, $conection)
+function number_of_pages($rows_per_page, $conection)
 {
-    $total_torrents = $conection->prepare("SELECT FOUND_ROWS() as total");
-    $total_torrents->execute();
-    $total_torrents = $total_torrents->fetch()["total"];
+    $total_rows = $conection->prepare("SELECT FOUND_ROWS() as total");
+    $total_rows->execute();
+    $total_rows = $total_rows->fetch()["total"];
 
-    $number_of_pages = ceil($total_torrents / $torrents_per_page);
+    $number_of_pages = ceil($total_rows / $rows_per_page);
 
     return $number_of_pages;
 }
 
-function torrents_byColumn_index($torrents_per_page, $conection, $order, $column)
+function check_o_and_c($path)
 {
-    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+    if($_GET['o'] != "desc" && $_GET['o'] != "asc") // Check o
+    {
+        header("Location: " . $path);
+    }
 
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents ORDER BY $column $order LIMIT $begin, $torrents_per_page");
-    $statement->execute();
-
-    return $torrents = $statement->fetchAll();
+    if($_GET['c'] != "size" && $_GET['c'] != "date" && $_GET['c'] != "likes" && $_GET['c'] != "dislikes") // Check c
+    {
+        header("Location: " . $path);
+    }
+    
 }
 
-function torrents_byColumn_search($torrents_per_page, $conection, $word, $order, $column)
-{
-    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word ORDER BY $column $order LIMIT $begin, $torrents_per_page");
-    $statement->execute(array("word" => "%$word%"));
+// This is thw worst shit of this page, but it works... //
+function get_rows($rows_per_page, $db, $conection, $optional)
+{   
+    if(isset($optional["order"]) && isset($optional["column"]) && isset($optional["word"]) && isset($optional["user_name"]))  // In torrents with word and filters
+    {
+        $column = $optional["column"];
+        $order = $optional["order"];
+        $word = $optional["word"];
+        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
 
-    return $torrents = $statement->fetchAll();
-}
+        $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db WHERE name LIKE :word and torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $rows_per_page");
+        $statement->execute(array("word" => "%$word%","user_name" => $optional["user_name"]));
 
-// Function to get the torrents of a especific user
-function user_torrents_search($torrents_per_page, $conection, $word, $column, $order, $user_name)
-{
-    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
+        return $rows = $statement->fetchAll();
+    }
+    else if(isset($optional["order"]) && isset($optional["column"]) && isset($optional["user_name"]))  // In torrents
+    {
+        $column = $optional["column"];
+        $order = $optional["order"];
+        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
+        
+        $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db WHERE torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $rows_per_page");
+        $statement->execute(array("user_name" => $optional["user_name"],));
+        
+        return $rows = $statement->fetchAll();
+    }
+    else if(isset($optional["order"]) && isset($optional["column"]) && isset($optional["word"])) // In search
+    {
+        $column = $optional["column"];
+        $order = $optional["order"];
+        $word = $optional["word"];
+        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
+    
+        $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db WHERE name LIKE :word ORDER BY $column $order LIMIT $begin, $rows_per_page");
+        $statement->execute(array("word" => "%$word%"));
 
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE name LIKE :word and torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $torrents_per_page");
-    $statement->execute(
-        array(
-            "word" => "%$word%",
-            "user_name" => $user_name
-        )
-    );
+        return $rows = $statement->fetchAll();
+    }
+    else if(isset($optional["order"]) && isset($optional["column"])) // In index
+    {
+        $column = $optional["column"];
+        $order = $optional["order"];
+        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
 
-    return $torrents = $statement->fetchAll();
-}
-
-function torrents_byColumn_torrents($torrents_per_page, $conection, $column, $order, $user_name)
-{
-    $begin = get_page() > 1 ? get_page() * $torrents_per_page - $torrents_per_page : 0;
-    $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM torrents WHERE torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $torrents_per_page");
-    $statement->execute(array("user_name" => $user_name));
-
-    return $torrents = $statement->fetchAll();
+        $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db ORDER BY $column $order LIMIT $begin, $rows_per_page");
+        $statement->execute();
+        
+        return $rows = $statement->fetchAll();
+    }
 }
 
 function get_torrentsize_byts($file_name)
@@ -113,11 +134,11 @@ function bytes_to_string($bytes)
     {
         return round($bytes / $kb, 1) . " KB";
     }
-    elseif($bytes >= $mb && $bytes < $gb) 
+    else if($bytes >= $mb && $bytes < $gb) 
     {
         return round($bytes / $mb, 1) . " MB";
     }
-    elseif($bytes >= $gb && $bytes < $tb)  
+    else if($bytes >= $gb && $bytes < $tb)  
     {
         return round($bytes / $gb, 1) . " GB";
     }

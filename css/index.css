@@ -20,6 +20,15 @@ h3 {
     font-weight: 500;
 }
 
+input, textarea {
+    outline: none;
+}
+
+input:focus, textarea:focus {
+    border: 1px solid #6CB2EA;
+    box-shadow: 0px 0px 3px 0px rgba(108,178,234,1);
+}
+
 tr > th {
     border-bottom-width: 2px;
 }
@@ -103,6 +112,11 @@ ul, li {
 
 .sub__menu li > a:hover {
     background-color: #F5F5F5;
+}
+
+.god-icon {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
 }
 
 header {

@@ -1,8 +1,10 @@
 RewriteEngine On
 
-# Check that it is not a directory and that exist
+# Delete the .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
 
-RewriteRule ^$ index [L]
+
+RewriteCond %{REQUEST_FILENAME} -admin
+RewriteRule . /index [L]

@@ -3,15 +3,15 @@
 require "admin/config.php";
 require "functions.php";
 
-if(!isset($_SESSION["user"]))
-{
-    header("Location: index");
-}
-
 $conection = conection_to_database($db_config);
 if(!$conection)
 {
     header("Location: error");
+}
+
+if(!isset($_SESSION["user"]))
+{
+    header("Location: index");
 }
 
 $statement = $conection->prepare("SELECT * FROM users WHERE id = :user_id LIMIT 1");
