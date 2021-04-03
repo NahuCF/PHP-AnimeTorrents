@@ -20,7 +20,7 @@ h3 {
     font-weight: 500;
 }
 
-input, textarea {
+input, textarea, button {
     outline: none;
 }
 
@@ -1013,6 +1013,10 @@ input::placeholder {
         display: flex;
     }
 
+    .header-bottom-container--active div:first-child {
+        padding: 15px 0 15px 15px;
+    }
+
     .sub__menu {
         position: unset;
 
@@ -1042,6 +1046,10 @@ input::placeholder {
         width: 100%;
         padding: 13px 16px;
         text-align: left;
+    }
+
+    .god-icon {
+        border-bottom: unset;
     }
 }
 

@@ -36,6 +36,7 @@
         </div>
     <?php endif; ?>
 
+    <?php echo '<script type="text/javascript" src="js/header.js"></script>'; ?>
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
 </body>
 </html>
