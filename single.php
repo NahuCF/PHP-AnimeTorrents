@@ -23,9 +23,12 @@ if(isset($_GET["ID"]))
                 "user_id" => (int)$_SESSION["userID"],
                 "torrent_id" => $torrent_id
             )
-        );
+        );  
+
+        header("Location: single?ID=" . $torrent_id);
     }
 
+    // Bring the info of the torrent
     $statement = $conection->prepare("SELECT * FROM torrents WHERE ID = :ID LIMIT 1");
     $statement->execute(array("ID" => $torrent_id));
     $torrent = $statement->fetch();

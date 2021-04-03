@@ -16,7 +16,16 @@
     <div class="wrap profile">
         <h2>Profile of <strong>NahuCF</strong></h2>
         <div class="profile-container">
-            <img class="avatar" src="imgs/default.png" alt="avatar">
+
+            <img class="avatar" src="<?php 
+                if($_SESSION["userType"] == "God")
+                    echo "imgs/god.jpg";
+                else if($_SESSION["userType"] == "Admin") 
+                    echo "imgs/admin.jpg";
+                else
+                    echo "imgs/user.png";
+            ?>" alt="avatar">
+
             <div class="profile-rows__container">
                 <div>
                     <div class="profile-row">  
@@ -124,6 +133,7 @@
         </div>
     </div>
     
-    <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
     <?php echo '<script type="text/javascript" src="js/profile.js"></script>'; ?>
+    <?php echo '<script type="text/javascript" src="js/header.js"></script>'; ?>
+    <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
 </body>

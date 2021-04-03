@@ -30,7 +30,7 @@
                         echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
                     }
                 }
-                else if(isset($_GET["u"])) // In search with u (user torrent)
+                else if(isset($_GET["u"])) // In torrents with u (user torrent)
                 {
                     $user = clean_string($_GET["u"]);
 
@@ -124,7 +124,7 @@
                             echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
                         }
                     }
-                    else if(isset($_GET["u"])) // In search with u (user torrent)
+                    else if(isset($_GET["u"])) // In torrents with u (user torrent)
                     {
                         $user = clean_string($_GET["u"]);
 
@@ -218,7 +218,7 @@
                         echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
                     }
                 }
-                else if(isset($_GET["u"])) // In search with u (user torrent)
+                else if(isset($_GET["u"])) // In torrents with u (user torrent)
                 {
                     $user = clean_string($_GET["u"]);
 
@@ -312,7 +312,7 @@
                         echo "?u=" . $user . "&w=" . $word . "&o=desc&c=" . $column;
                     }
                 }
-                else if(isset($_GET["u"])) // In search with u (user torrent)
+                else if(isset($_GET["u"])) // In torrents with u (user torrent)
                 {
                     $user = clean_string($_GET["u"]);
 

@@ -762,6 +762,10 @@ input::placeholder {
     margin-bottom: 10px;
 }
 
+.profile-container img {
+    border-radius: 30px;
+}
+
 .profile-rows__container {
     display: flex;
     align-items:  center;
