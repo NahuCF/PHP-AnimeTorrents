@@ -1,6 +1,7 @@
-<?php if(basename($_SERVER["PHP_SELF"], ".php") === "admin"): ?>
+<?php if(basename($_SERVER["PHP_SELF"], ".php") === "admins" || basename($_SERVER["PHP_SELF"], ".php") === "users"): ?>
     <tr>
-        <th class="thead__name">Admin Name</th>
+        <th class="thead__name"><?php echo basename($_SERVER["PHP_SELF"], ".php") === "admins" ? "Admin name" : "User Name"; ?></th>
+        <th>Option</th>
     </tr>
 <?php else: ?>
     <tr>

@@ -14,9 +14,9 @@ if(!isset($_SESSION["user"]) && $_SESSION["userType"] != "God" && $_SESSION["use
     header("Location: ../index");
 }
 
-$statement = $conection->query("SELECT * FROM users WHERE userType = 'Admin'");
-$admins = $statement->fetchAll();
+$statement = $conection->query("SELECT * FROM users WHERE userType = 'User'");
+$users = $statement->fetchAll();
 
-require "../view/admin.view.php";
+require "../view/admin.view/users.view.php";
 
 ?>

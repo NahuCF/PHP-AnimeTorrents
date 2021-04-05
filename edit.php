@@ -18,7 +18,7 @@ if(isset($_GET["t"]))
 
     if($torrent["userID"] == $_SESSION["userID"] && !empty($torrent))
     {   
-        //If request if by POST mean that you can update or delete the torrent
+        //If request is by POST means that you can update or delete the torrent
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
             if(isset($_POST["update_torrentbtn"]))

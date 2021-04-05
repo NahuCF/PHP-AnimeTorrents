@@ -56,51 +56,49 @@ function check_o_and_c($path)
 // This is thw worst shit of this page, but it works... //
 function get_rows($rows_per_page, $db, $conection, $optional)
 {   
+    $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
+
     if(isset($optional["order"]) && isset($optional["column"]) && isset($optional["word"]) && isset($optional["user_name"]))  // In torrents with word and filters
     {
         $column = $optional["column"];
         $order = $optional["order"];
         $word = $optional["word"];
-        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
 
         $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db WHERE name LIKE :word and torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $rows_per_page");
         $statement->execute(array("word" => "%$word%","user_name" => $optional["user_name"]));
 
-        return $rows = $statement->fetchAll();
+        return $statement->fetchAll();
     }
     else if(isset($optional["order"]) && isset($optional["column"]) && isset($optional["user_name"]))  // In torrents
     {
         $column = $optional["column"];
         $order = $optional["order"];
-        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
         
         $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db WHERE torrentOwnerName = :user_name ORDER BY $column $order LIMIT $begin, $rows_per_page");
         $statement->execute(array("user_name" => $optional["user_name"],));
         
-        return $rows = $statement->fetchAll();
+        return $statement->fetchAll();
     }
     else if(isset($optional["order"]) && isset($optional["column"]) && isset($optional["word"])) // In search
     {
         $column = $optional["column"];
         $order = $optional["order"];
         $word = $optional["word"];
-        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
     
         $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db WHERE name LIKE :word ORDER BY $column $order LIMIT $begin, $rows_per_page");
         $statement->execute(array("word" => "%$word%"));
 
-        return $rows = $statement->fetchAll();
+        return $statement->fetchAll();
     }
     else if(isset($optional["order"]) && isset($optional["column"])) // In index
     {
         $column = $optional["column"];
         $order = $optional["order"];
-        $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
 
         $statement = $conection->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM $db ORDER BY $column $order LIMIT $begin, $rows_per_page");
         $statement->execute();
         
-        return $rows = $statement->fetchAll();
+        return $statement->fetchAll();
     }
 }
 

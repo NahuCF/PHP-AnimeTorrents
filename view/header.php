@@ -1,4 +1,4 @@
-<?php if(basename($_SERVER["PHP_SELF"], ".php") == "admin"): ?>
+<?php if(basename($_SERVER["PHP_SELF"], ".php") == "admins" || basename($_SERVER["PHP_SELF"], ".php") == "users"): ?>
     <header>
         <div class="header-top">
             <a style="font-size: 18px;" href="../index">Nyaa Copy</a>
@@ -19,7 +19,7 @@
                     <?php if(isset($_GET["u"])): ?>
                         <input name="u" value="<?php echo clean_string($_GET['u']); ?>" style="pointer-events: none; display: none" type="text">
                     <?php endif; ?>
-                    <input class="input_search" name="w" type="text" placeholder="<?php echo isset($_GET["u"]) ? "Search " . clean_string($_GET["u"]) . "'" . " torrents" : "Search..." ?>">  
+                        <input class="input_search" name="w" type="text" placeholder="<?php echo isset($_GET["u"]) ? "Search " . clean_string($_GET["u"]) . "'" . " torrents" : "Search..." ?>">  
                     <div class="button__headercontenedor" >
                         <button class="header__submitbtn" type="submit"><i class="fa fa-search fa-fw"></i></button>
                     </div>
@@ -43,9 +43,15 @@
 
                                 <?php if($_SESSION["userType"] === "God"): ?>
                                     <li>
-                                        <a class="god-icon" href="admin">
+                                        <a href="users">
                                             <i class="fas fa-user-cog"></i>
-                                            God List
+                                            Users
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="god-icon" href="admins">
+                                            <i class="fas fa-user-cog"></i>
+                                            Admins
                                         </a>
                                     </li>
                                 <?php endif; ?>
@@ -129,9 +135,15 @@
 
                                 <?php if($_SESSION["userType"] === "God"): ?>
                                     <li>
-                                        <a class="god-icon" href="admin/admin">
+                                        <a href="admin/users">
                                             <i class="fas fa-user-cog"></i>
-                                            God List
+                                            Users
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="god-icon" href="admin/admins">
+                                            <i class="fas fa-user-cog"></i>
+                                            Admins
                                         </a>
                                     </li>
                                 <?php endif; ?>

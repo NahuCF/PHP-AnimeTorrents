@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         $statement = $conection->prepare("INSERT INTO torrents VALUES(null, :name, :type, :data, :userName, :userID, null, :magnet, :size, :likes, :dislikes, :description)");
             $statement->execute(
                 array(
-                    "name" => $file_name,
+                    "name"  => $file_name,
                     "type" => $file_type,
                     "data" => $file_data,
                     "userName" => $_SESSION["user"],

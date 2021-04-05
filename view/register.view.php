@@ -10,7 +10,7 @@
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <title>Register</title>
+    <title><?php echo "Register :: Nyaa Copy"; ?></title>
 </head>
 <body>
     <?php require "header.php"; ?>
@@ -18,7 +18,7 @@
     <div class="wrap">
         <div class="top">
             <h1>Register</h1>
-            <p><strong>Important:</strong> Do not attempt to register using a VPN or proxy, almost all are blocked from registering due to malware and spam. If you try anyway your account will not work by default and will need to be manually activated over IRC which is not guaranteed to happen.</p>
+            <p><strong>Important: </strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit sed corrupti exercitationem, aliquid error alias quaerat vero ullam ratione rem porro nulla eum quam accusantium quasi a. Quidem, quos facere.</p>
         </div>
         <form class="register__form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="POST">
             <div class="row">

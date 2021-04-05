@@ -1,4 +1,4 @@
-<?php if(isset($rows)): ?>
+<?php if(isset($rows)): ?> 
     <?php foreach($rows as $row): ?>
         <tr class="row__table">
             <td class="colaps"><a href="<?php echo "single" . "?ID=" . $row["ID"]; ?>"><?php echo $row["name"]; ?></a></td>
@@ -17,9 +17,16 @@
         </tr>
     <?php endforeach; ?>
 <?php else: ?>
-    <?php foreach($admins as $admin): ?>
+    <?php foreach($users as $user): ?>
         <tr>
-            <th class="thead__name"><?php echo $admin["user"]; ?></th>
+            <td class="thead__name"><?php echo $user["user"]; ?></td>
+            <td>
+                <?php if(basename($_SERVER["PHP_SELF"], ".php") == "users"): ?>
+                    <button class="promote" value="<?php echo $user["ID"]; ?>">Promote</button>
+                <?php else: ?>
+                    <button class="demote" value="<?php echo $user["ID"]; ?>">Demote</button>
+                <?php endif; ?>
+            </td>
         </tr>
     <?php endforeach; ?>
 <?php endif; ?>
