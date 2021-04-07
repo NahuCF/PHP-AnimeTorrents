@@ -14,7 +14,9 @@ if(!isset($_SESSION["user"]) && $_SESSION["userType"] != "God" && $_SESSION["use
     header("Location: ../index");
 }
 
-$statement = $conection->query("SELECT * FROM users WHERE userType = 'Admin'");
+$begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
+$end = $page_config["rows_per_page"];
+$statement = $conection->query("SELECT SQL_CALC_FOUND_ROWS * FROM users WHERE userType = 'Admin' LIMIT $begin, $end");
 $users = $statement->fetchAll();
 
 require "../view/admin.view/admins.view.php";

@@ -21,7 +21,7 @@ if(isset($_GET["t"]))
         //If request is by POST means that you can update or delete the torrent
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            if(isset($_POST["update_torrentbtn"]))
+            if(isset($_POST["update_torrentbtn"])) //User want to update
             {
                 $statement = $conection->prepare("UPDATE torrents SET name = :torrent_name, magnet = :torrent_magnet, description = :torrent_description WHERE ID = :torrent_id LIMIT 1");
                 $statement->execute(
@@ -33,9 +33,9 @@ if(isset($_GET["t"]))
                     )
                 );
 
-                header("Location: index.php");
+                header("Location: single?ID=" . $torrent["ID"]);
             }
-            else
+            else //User want to delete
             {
                 $statement = $conection->prepare("DELETE FROM torrents WHERE ID = :torrent_id LIMIT 1");
                 $statement->execute(array("torrent_id" => $torrent["ID"]));

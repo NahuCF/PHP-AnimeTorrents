@@ -14,8 +14,18 @@ if(!isset($_SESSION["user"]) && $_SESSION["userType"] != "God" && $_SESSION["use
     header("Location: ../index");
 }
 
-$statement = $conection->query("SELECT * FROM users WHERE userType = 'User'");
-$users = $statement->fetchAll();
+if(isset($_POST["scroll_times"]))
+{
+    $end = $page_config["users_per_page"] * $_POST["scroll_times"];
+    $statement = $conection->query("SELECT SQL_CALC_FOUND_ROWS * FROM users WHERE userType = 'User' LIMIT 0, $end");
+    $users = $statement->fetchAll();
+}
+else
+{
+    $end = $page_config["users_per_page"];
+    $statement = $conection->query("SELECT SQL_CALC_FOUND_ROWS * FROM users WHERE userType = 'User' LIMIT 0, $end");
+    $users = $statement->fetchAll();
+}
 
 $rows = [];
 
@@ -24,8 +34,7 @@ foreach($users as $user)
     $user =
     [
         "ID" => $user["ID"],
-        "user" => $user["user"],
-        "userType" => $user["userType"]
+        "user" => $user["user"]
     ];
 
     array_push($rows, $user);

@@ -93,7 +93,13 @@
                         <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
                             <div class="comment-photo">
                                 <div class="comment-user"><a href="<?php echo "torrents?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
-                                <img src="imgs/default.png" alt="avatar">
+                                <?php if($_SESSION["userType"] == "God"): ?>
+                                    <img src="imgs/god.jpg" alt="avatar">
+                                <?php elseif($_SESSION["userType"] == "Admin"): ?>
+                                    <img src="imgs/admin.jpg" alt="avatar">
+                                <?php else: ?>
+                                    <img src="imgs/user.png" alt="avatar">
+                                <?php endif; ?>
                             </div>
                             <div class="comment-container">
                                 <div><a href="<?php echo "#com-" . $i + 1 ?>"><?php echo retrive_comment_date($comments[$i]); ?></a></div>
@@ -111,6 +117,7 @@
                     <button class="comment__form-button" type="submit">Submit</button>
                 </form>
             <?php endif; ?>
+            
         </div>
     </div>
 

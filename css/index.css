@@ -20,6 +20,10 @@ h3 {
     font-weight: 500;
 }
 
+img {
+    border-radius: 20px
+}
+
 input, textarea, button {
     outline: none;
 }
@@ -91,7 +95,7 @@ ul, li {
     border-top: none;
     border-radius: 0px 0px 4px 4px;
     background-color: white;
-    box-shadow: -1px 4px 36px -9px rgba(0,0,0,0.75);
+    box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
 }
 
 .user__type--active {
@@ -761,10 +765,6 @@ input::placeholder {
     margin-bottom: 10px;
 }
 
-.profile-container img {
-    border-radius: 30px;
-}
-
 .profile-rows__container {
     display: flex;
     align-items:  center;
@@ -884,6 +884,39 @@ input::placeholder {
 
 .danger-panel__btn:hover {
     cursor: pointer;
+    background-color: #C9302C;
+}
+
+/* USERS.PHP */
+
+.promote {
+    padding: 2px 5px;
+
+    font-size: 14px;
+    color: white;
+    
+    background-color: #5cb85c;
+    border-radius: 3px;
+    border: 1px solid #4cae4c;
+}
+
+.demote {
+    padding: 2px 5px;
+
+    font-size: 14px;
+    color: white;
+
+    background-color: #d9534f;
+    border-radius: 3px;
+    border: 1px solid #d43f3a;
+}
+
+.promote:hover {
+    background-color: #449D44;
+    cursor: pointer;
+}
+
+.demote:hover {
     background-color: #C9302C;
 }
 

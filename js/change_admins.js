@@ -1,46 +1,128 @@
 var demoteBtn = document.getElementsByClassName("demote");
-var table = document.getElementsByTagName("tbody")[0];
+var table = document.getElementsByTagName("table")[0];
+var tableBody = document.getElementsByTagName("tbody")[0];
 
-function getUsers()
+table.style.width = "unset";
+
+/////////////
+// DEFAULT //
+/////////////
+
+function addEvents(parameter)
 {
-    var petition = new XMLHttpRequest();
-    petition.open("GET", "get_admins.php");
-    petition.send();
-
-    petition.onload = function()
-    {
-        let userData = JSON.parse(petition.responseText);
-        table.innerHTML = '';
-        
-        for(let i = 0; i < userData.length; i++)
-        {
-            let row = document.createElement("tr");
-            row.innerHTML += ("<td>" + userData[i].user + "</td>");
-            row.innerHTML += ("<td>" + '<button class="demote"' + ' value="' + userData[i].ID  + '"' + ">demote</button>" + "</td>");
-
-            table.appendChild(row);
-        }
-
-        updateTable();
-    }
+    parameter();
 }
 
-function updateTable()
+function reloadTable()
 {
     for(let i = 0; i < demoteBtn.length; i++)
     {
         demoteBtn[i].addEventListener("click", function()
         {
+            //Change rights of the user
             var petition = new XMLHttpRequest();
             petition.open("POST", "change_admins.php");
-            petition.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-            var parameter = "ID=" + demoteBtn[i].value;
-            petition.send(parameter);
+            petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            petition.send("ID=" + demoteBtn[i].value);
             
-            getUsers();
-        }); 
+            //Remake the table
+            var petition = new XMLHttpRequest();
+            petition.open("GET", "get_admins.php");
+            petition.send();
+
+            petition.onload = function()
+            { 
+                var rows = JSON.parse(petition.responseText);
+                tableBody.innerHTML = '';
+                
+                for(let i = 0; i < rows.length; i++)
+                {
+                    var element = document.createElement("tr");
+                    element.innerHTML += ("<td>" + rows[i].user + "</td>");
+                    element.innerHTML += ("<td><button class='demote' value='" + rows[i].ID + "'" + ">Demote</button></td>");
+
+                    tableBody.appendChild(element);
+                }
+                
+                reloadTable();
+            }
+        });
     }
 }
 
-updateTable();
+addEvents(reloadTable);
+
+
+//////////////////////////
+// SCROLL TO THE BOTTOM //
+//////////////////////////
+
+var scroll_times = 1;
+
+function reloadTableScroll()
+{
+    //Remake the table
+    var petition = new XMLHttpRequest();
+    petition.open("POST", "get_admins.php");
+    petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    petition.send("scroll_times=" + scroll_times);
+
+    petition.onload = function()
+    { 
+        var rows = JSON.parse(petition.responseText);
+        tableBody.innerHTML = '';
+        
+        for(let i = 0; i < rows.length; i++)
+        {
+            var element = document.createElement("tr");
+            element.innerHTML += ("<td>" + rows[i].user + "</td>");
+            element.innerHTML += ("<td><button class='demote' value='" + rows[i].ID + "'" + ">Demote</button></td>");
+
+            tableBody.appendChild(element);
+        }
+
+        for(let i = 0; i < demoteBtn.length; i++)
+        {
+            demoteBtn[i].addEventListener("click", function()
+            {
+                //Change rights of the user
+                var petition = new XMLHttpRequest();
+                petition.open("POST", "change_admins.php");
+                petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                petition.send("ID=" + demoteBtn[i].value);
+                
+                //Remake the table
+                var petition = new XMLHttpRequest();
+                petition.open("POST", "get_admins.php");
+                petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                petition.send("scroll_times=" + scroll_times);
+
+                petition.onload = function()
+                { 
+                    var rows = JSON.parse(petition.responseText);
+                    tableBody.innerHTML = '';
+                    
+                    for(let i = 0; i < rows.length; i++)
+                    {
+                        var element = document.createElement("tr");
+                        element.innerHTML += ("<td>" + rows[i].user + "</td>");
+                        element.innerHTML += ("<td><button class='demote' value='" + rows[i].ID + "'" + ">Demote</button></td>");
+
+                        tableBody.appendChild(element);
+                    }
+                    
+                    reloadTableScroll();
+                }
+            });
+        }
+    }
+}
+
+window.onscroll = function()
+{
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight) 
+    {
+        scroll_times++;
+        reloadTableScroll();
+    }
+}

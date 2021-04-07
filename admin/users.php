@@ -14,7 +14,8 @@ if(!isset($_SESSION["user"]) && $_SESSION["userType"] != "God" && $_SESSION["use
     header("Location: ../index");
 }
 
-$statement = $conection->query("SELECT * FROM users WHERE userType = 'User'");
+$end = $page_config["users_per_page"];
+$statement = $conection->query("SELECT SQL_CALC_FOUND_ROWS * FROM users WHERE userType = 'User' LIMIT 0, $end");
 $users = $statement->fetchAll();
 
 require "../view/admin.view/users.view.php";
