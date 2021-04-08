@@ -887,7 +887,7 @@ input::placeholder {
     background-color: #C9302C;
 }
 
-/* USERS.PHP */
+/* USERS.PHP and ADMINS.PHP*/
 
 .promote {
     padding: 2px 5px;
@@ -918,6 +918,10 @@ input::placeholder {
 
 .demote:hover {
     background-color: #C9302C;
+}
+
+.input_search--borders {
+    border-radius: 4px;
 }
 
 @media (max-width: 1200px) {

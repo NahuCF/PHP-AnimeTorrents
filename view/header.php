@@ -1,4 +1,4 @@
-<?php if(basename($_SERVER["PHP_SELF"], ".php") == "admins" || basename($_SERVER["PHP_SELF"], ".php") == "users"): ?>
+<?php if(basename(htmlspecialchars($_SERVER["PHP_SELF"]), ".php") == "admins" || basename(htmlspecialchars($_SERVER["PHP_SELF"]), ".php") == "users"): ?>
     <header>
         <div class="header-top">
             <a style="font-size: 18px;" href="../index">Nyaa Copy</a>
@@ -15,16 +15,24 @@
             <?php endif; ?>
 
             <div class="header-bottom">
-                <form class="form-header" action="search" method="GET">
-                    <?php if(isset($_GET["u"])): ?>
-                        <input name="u" value="<?php echo clean_string($_GET['u']); ?>" style="pointer-events: none; display: none" type="text">
-                    <?php endif; ?>
-                        <input class="input_search" name="w" type="text" placeholder="<?php echo isset($_GET["u"]) ? "Search " . clean_string($_GET["u"]) . "'" . " torrents" : "Search..." ?>">  
-                    <div class="button__headercontenedor" >
-                        <button class="header__submitbtn" type="submit"><i class="fa fa-search fa-fw"></i></button>
-                    </div>
-                </form>
-
+                <input class="input_search input_search--borders" type="text" placeholder="<?php 
+                    if(isset($_GET["u"]))
+                    {
+                        echo "Search " . clean_string($_GET["u"]) . "'" . " torrents";
+                    }
+                    else if(basename(htmlspecialchars($_SERVER["PHP_SELF"]), ".php") == "users")
+                    {
+                        echo "Search User...";
+                    }
+                    else if(basename(htmlspecialchars($_SERVER["PHP_SELF"]), ".php") == "admins")
+                    {
+                        echo "Search Admin...";
+                    }
+                    else
+                    {
+                        echo "Search...";
+                    }
+                    ?>">  
                 <ul class="user__list">
                     <li class="first__list">
 
@@ -40,7 +48,6 @@
 
                         <ul class="sub__menu" id="sub__menu">
                             <?php if(isset($_SESSION["user"])): ?>
-
                                 <?php if($_SESSION["userType"] === "God"): ?>
                                     <li>
                                         <a href="users">
@@ -55,7 +62,6 @@
                                         </a>
                                     </li>
                                 <?php endif; ?>
-
                                 <li>
                                     <a href="../profile">
                                         <i class="fas fa-cog"></i>
@@ -82,8 +88,7 @@
                                     </a>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                        
+                        </ul>        
                     </li>
                 </ul>   
             </div>

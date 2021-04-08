@@ -1,6 +1,8 @@
 var promoteBtn = document.getElementsByClassName("promote");
 var table = document.getElementsByTagName("table")[0];
 var tableBody = document.getElementsByTagName("tbody")[0];
+var input = document.getElementsByClassName("input_search")[0];
+var inputButton = document.getElementsByClassName("header__submitbtn")[0];
 
 table.style.width = "unset";
 
@@ -121,3 +123,73 @@ window.onscroll = function()
         reloadTableScroll();
     }
 }
+
+/////////////////
+// Input field //
+/////////////////
+
+function reloadTableInput(inputValue)
+{
+    for(let i = 0; i < promoteBtn.length; i++)
+        {
+            promoteBtn[i].addEventListener("click", function()
+            {
+                //Change rights of the user
+                var petition = new XMLHttpRequest();
+                petition.open("POST", "change_users.php");
+                petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                petition.send("ID=" + promoteBtn[i].value);
+                
+                //Remake the table
+                var petition = new XMLHttpRequest();
+                petition.open("POST", "get_users.php");
+                petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                petition.send("user_name=" + inputValue);
+
+                petition.onload = function()
+                { 
+                    var rows = JSON.parse(petition.responseText);
+                    tableBody.innerHTML = '';
+                    
+                    for(let i = 0; i < rows.length; i++)
+                    {
+                        var element = document.createElement("tr");
+                        element.innerHTML += ("<td>" + rows[i].user + "</td>");
+                        element.innerHTML += ("<td><button class='promote' value='" + rows[i].ID + "'" + ">Promote</button></td>");
+
+                        tableBody.appendChild(element);
+                    }
+                    
+                    reloadTableInput(inputValue);
+                }
+            });
+        }
+}
+
+input.addEventListener("keyup", function()
+{
+    var inputValue = String(input.value);
+
+    var petition = new XMLHttpRequest();
+    petition.open("POST", "get_users.php");
+    petition.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    petition.send("user_name=" + inputValue);
+
+    petition.onload = function()
+    {
+        var rows = JSON.parse(petition.responseText);
+        tableBody.innerHTML = '';
+
+        for(let i = 0; i < rows.length; i++)
+        {
+            var element = document.createElement("tr");
+            element.innerHTML += ("<td>" + rows[i].user + "</td>");
+            element.innerHTML += ("<td><button class='promote' value='" + rows[i].ID + "'" + ">Promote</button></td>");
+
+            tableBody.appendChild(element);
+        }
+
+        //Add events
+        reloadTableInput(inputValue);
+    }
+});
