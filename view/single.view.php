@@ -54,22 +54,28 @@
                 </div>
             </div> 
             <div class="bottom">
-                <a href="<?php echo "dowload?f=" . $torrent["ID"]; ?>">
-                    <i class="fas fa-download"></i>
-                    Dowload Torrent
-                </a>
-                <span> or </span>
-                <?php if(!empty($torrent["magnet"])): ?>
-                    <a href="<?php echo $torrent["magnet"]; ?>">
-                        <i class="fas fa-magnet"></i>
-                        Magnet
+                <div>
+                    <a href="<?php echo "dowload?f=" . $torrent["ID"]; ?>">
+                        <i class="fas fa-download"></i>
+                        Dowload Torrent
                     </a>
-                <?php else: ?>
-                    <a id="magnet__red" href="<?php echo $torrent["magnet"]; ?>">
-                        <i id="magnet__red" class="fas fa-magnet"></i>
-                        Magnet
-                    </a>
-                <?php endif; ?>
+                    <div>
+                        <span> or </span>
+                        <?php if(!empty($torrent["magnet"])): ?>
+                            <a href="<?php echo $torrent["magnet"]; ?>">
+                                <i class="fas fa-magnet"></i>
+                                Magnet
+                            </a>
+                        <?php else: ?>
+                            <a id="magnet__red" href="<?php echo $torrent["magnet"]; ?>">
+                                <i id="magnet__red" class="fas fa-magnet"></i>
+                                Magnet
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <button class="report-btn">Report</button>
             </div>
         </div>  
 
@@ -121,6 +127,7 @@
         </div>
     </div>
 
+    <?php echo '<script type="text/javascript" src="js/header.js"></script>'; ?>
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
 </body>
 </html>
