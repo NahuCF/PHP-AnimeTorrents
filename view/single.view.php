@@ -75,7 +75,9 @@
                     </div>
                 </div>
 
-                <button class="report-btn">Report</button>
+               <?php if(isset($_SESSION["user"])): ?>
+                    <button class="report-btn">Report</button>
+                <?php endif; ?>
             </div>
         </div>  
 
@@ -99,13 +101,7 @@
                         <div class="comment" id="<?php echo "com-" . $i + 1 ?>">
                             <div class="comment-photo">
                                 <div class="comment-user"><a href="<?php echo "torrents?u=" . $comments[$i]["commentOwnerName"]; ?>"><?php echo $comments[$i]["commentOwnerName"]; ?></a></div>
-                                <?php if($_SESSION["userType"] == "God"): ?>
-                                    <img src="imgs/god.jpg" alt="avatar">
-                                <?php elseif($_SESSION["userType"] == "Admin"): ?>
-                                    <img src="imgs/admin.jpg" alt="avatar">
-                                <?php else: ?>
-                                    <img src="imgs/user.png" alt="avatar">
-                                <?php endif; ?>
+                                <img src="<?php echo "./imgs/" . $comments[$i]["photo_name"]; ?>" alt="avatar">
                             </div>
                             <div class="comment-container">
                                 <div><a href="<?php echo "#com-" . $i + 1 ?>"><?php echo retrive_comment_date($comments[$i]); ?></a></div>

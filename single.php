@@ -15,13 +15,17 @@ if(isset($_GET["ID"]))
 
     if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["comment"]))
     {
-        $statement = $conection->prepare("INSERT INTO comments values(null, :comment, :user, :user_id, :torrent_id, null)");
+        $photo_name = '';
+        $photo_name = $_SESSION["userType"] == "God" ? "god.jpg" : ($_SESSION["userType"] == "Admin" ? "admin.jpg" : "user.png");
+        
+        $statement = $conection->prepare("INSERT INTO comments values(null, :comment, :user, :user_id, :torrent_id, null, :photo_name)");
         $statement->execute(
             array(
                 "comment" => clean_string($_POST["comment"]),
                 "user" => $_SESSION["user"],
                 "user_id" => (int)$_SESSION["userID"],
-                "torrent_id" => $torrent_id
+                "torrent_id" => $torrent_id,
+                "photo_name" => $photo_name
             )
         );  
 
