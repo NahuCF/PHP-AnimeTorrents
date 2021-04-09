@@ -71,6 +71,15 @@ ul, li {
  
 /* HEADER.PHP */
 
+.sub__menu .fa-magnet {
+    color: black;
+    font-size: 12px;
+}
+
+.sub__menu hr {
+    margin: 5px 0px;
+}
+
 .user__list {
     height: 100%;
 }
@@ -132,9 +141,7 @@ ul, li {
     background-color: #F5F5F5;
 }
 
-.god-icon {
-    border-bottom: 1px solid #ddd;
-}
+
 
 header {
     margin-bottom: 20px;

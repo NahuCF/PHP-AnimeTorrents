@@ -48,7 +48,7 @@
 
                         <ul class="sub__menu" id="sub__menu">
                             <?php if(isset($_SESSION["user"])): ?>
-                                <?php if($_SESSION["userType"] === "God"): ?>
+                                <?php if($_SESSION["userType"] === "God" || $_SESSION["userType"] === "Admin"): ?>
                                     <li>
                                         <a href="users">
                                             <i class="fas fa-user-cog"></i>
@@ -61,7 +61,14 @@
                                             Admins
                                         </a>
                                     </li>
+                                    <hr>
                                 <?php endif; ?>
+                                <li>
+                                    <a href="<?php echo "../torrents?u=" . $_SESSION["user"]; ?>">
+                                        <i class="fas fa-magnet"></i>
+                                        Torrents
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="../profile">
                                         <i class="fas fa-cog"></i>
@@ -137,7 +144,6 @@
 
                         <ul class="sub__menu" id="sub__menu">
                             <?php if(isset($_SESSION["user"])): ?>
-
                                 <?php if($_SESSION["userType"] === "God"): ?>
                                     <li>
                                         <a href="admin/users">
@@ -151,8 +157,14 @@
                                             Admins
                                         </a>
                                     </li>
+                                    <hr>
                                 <?php endif; ?>
-
+                                <li>
+                                    <a href="<?php echo "torrents?u=" . $_SESSION["user"]; ?>">
+                                        <i class="fas fa-magnet"></i>
+                                        Torrents
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="profile">
                                         <i class="fas fa-cog"></i>

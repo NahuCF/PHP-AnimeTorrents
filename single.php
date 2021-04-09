@@ -23,7 +23,7 @@ if(isset($_GET["ID"]))
             array(
                 "comment" => clean_string($_POST["comment"]),
                 "user" => $_SESSION["user"],
-                "user_id" => (int)$_SESSION["userID"],
+                "user_id" => $_SESSION["userID"],
                 "torrent_id" => $torrent_id,
                 "photo_name" => $photo_name
             )
