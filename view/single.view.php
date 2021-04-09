@@ -10,7 +10,31 @@
 
     <title>Single</title>
 </head>
-<body>
+<body style="position: relative"> 
+
+    <div id="report-container" class="report-container">
+        <div class="report">
+            <div class="report__top">
+                <h4><?php echo "Report torrent #" . $torrent["ID"]; ?></h4>
+                <button><i class="fas fa-times"></i></button>
+            </div>
+            <div class="report__bottom">
+                <div class="report__text">
+                    Before submitting a report, please check that the torrent actually breaks
+                    <a href="rules">the rules</a>. Useless reports like "download is slow" or "thanks" can get you banned from the site.
+                </div>
+                <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    <label for="report-area">Report Reason</label>
+                    <textarea name="reportesito" id="report-area" maxlength="500"></textarea>
+                    <div class="report__butons">
+                        <button id="button_close" class="button_close" type="button">Close</button>
+                        <button class="button_report" type="submit">Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <?php require "header.php"; ?>
 
     <div class="single-wrap">
@@ -76,7 +100,7 @@
                 </div>
 
                <?php if(isset($_SESSION["user"])): ?>
-                    <button class="report-btn">Report</button>
+                    <button id="report-btn" class="report-btn">Report</button>
                 <?php endif; ?>
             </div>
         </div>  
@@ -122,8 +146,9 @@
             
         </div>
     </div>
-
+    
     <?php echo '<script type="text/javascript" src="js/header.js"></script>'; ?>
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
+    <?php echo '<script type="text/javascript" src="js/report.js"></script>'; ?>
 </body>
 </html>

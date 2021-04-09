@@ -13,7 +13,7 @@ if(isset($_GET["ID"]))
 {
     $torrent_id = clean_string($_GET["ID"]);
 
-    if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["comment"]))
+    if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["comment"])) //Make a comment
     {
         $photo_name = '';
         $photo_name = $_SESSION["userType"] == "God" ? "god.jpg" : ($_SESSION["userType"] == "Admin" ? "admin.jpg" : "user.png");
@@ -28,6 +28,21 @@ if(isset($_GET["ID"]))
                 "photo_name" => $photo_name
             )
         );  
+
+        header("Location: single?ID=" . $torrent_id);
+    }
+    else if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["reportesito"])) //Report a torrent
+    {
+        $text = clean_string($_POST["reportesito"]);
+
+        $statement = $conection->prepare("INSERT INTO reports values(null, :torrent_id, :user_id, :text)");
+        $statement->execute(
+            array(
+                "torrent_id" => $torrent_id,
+                "user_id" => $_SESSION["userID"],
+                "text" => $text
+            )
+        );
 
         header("Location: single?ID=" . $torrent_id);
     }

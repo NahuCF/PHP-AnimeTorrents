@@ -20,12 +20,26 @@ h3 {
     font-weight: 500;
 }
 
+h4 {
+    font-size: 18px;
+}
+
 img {
     border-radius: 20px
 }
 
+label {
+    display: inline-table;
+}
+
 input, textarea, button {
     outline: none;
+}
+
+textarea {
+    min-width: 100%;
+    max-width: 100%;
+    padding: 6px 12px;
 }
 
 input:focus, textarea:focus {
@@ -520,9 +534,6 @@ input::placeholder {
 }
 
 .description__container textarea {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
     height: 360px;
     padding: 10px 12px;
     box-sizing: border-box;
@@ -778,6 +789,129 @@ input::placeholder {
 .comment__form-button:hover {
     background-color: #449D44;
     cursor: pointer;
+}
+
+.report-container {
+    display: none;
+}
+
+.report-container--active {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+
+    padding-top: 40px;
+
+    z-index: 2;
+    background-color:rgba(43, 43, 43, 0.42); 
+}
+
+.report {
+    margin: auto;
+    border: 1px solid #ddd;
+
+    max-width: 600px;
+    border-radius: 6px;
+
+    background-color: white;
+}
+
+.report__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #ddd;
+
+    padding: 15px;
+}
+
+.report__top h4 {
+    font-weight: 500;
+}
+
+.report__top button {
+    background-color: transparent;
+    border: 0;
+}
+
+.fa-times:hover {
+    cursor: pointer;
+    color: #7F7F7F;
+}
+
+.report__bottom {
+    padding: 15px;
+}
+
+.report__text {
+    padding: 15px;
+    margin-bottom: 20px;
+
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+}
+
+.report__butons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.report__bottom textarea {
+    height: 70px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    margin-bottom: 10px;
+}
+
+.report__bottom button {
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.report__bottom form label {
+    margin-bottom: 5px;
+}
+
+.button_close {
+    margin-right: 5px;
+}
+
+.button_close {
+    background-color: white;
+    
+    border: 1px solid #ccc;
+}
+
+.button_close:hover {
+    cursor: pointer;
+    background-color: #E6E6E6;
+}
+
+.button_report {
+    background-color: #E68F8C;
+    border: 1px solid #e07b77;
+    color: white;
+
+    cursor: not-allowed;
+}
+
+.button_report--active {
+    color: white;
+    background-color: #d9534f;
+    border: 1px solid #da8c89;
+}
+
+.button_report--active:hover {
+    cursor: pointer;
+    background-color: #C9302C;
 }
 
 /* PROFILE */
@@ -1174,7 +1308,6 @@ input::placeholder {
     .wrap {
         margin: 0px;
     }
-
 }
 
 @media (max-width: 350px) {
@@ -1187,4 +1320,3 @@ input::placeholder {
         flex-direction: column;
     }
 }
-
