@@ -9,7 +9,7 @@ if(!$conection)
     header("Location: ../error");
 }
 
-if(!isset($_SESSION["user"]) && $_SESSION["userType"] != "God" && $_SESSION["userType"] != "Admin")
+if(!isset($_SESSION["user"]) && $_SESSION["userType"] != "God" || $_SESSION["userType"] == "Admin")
 {
     header("Location: ../index");
 }

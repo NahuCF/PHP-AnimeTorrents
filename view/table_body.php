@@ -16,7 +16,7 @@
             <td class="text-center" style="color: red;"><?php echo $row["dislikes"]; ?></td>
         </tr>
     <?php endforeach; ?>
-<?php else: ?>
+<?php elseif(isset($users)): ?>
     <?php foreach($users as $user): ?>
         <tr>
             <td class="thead__name"><?php echo $user["user"]; ?></td>
@@ -28,5 +28,13 @@
                 <?php endif; ?>
             </td>
         </tr>
+    <?php endforeach; ?>
+<?php else: ?>
+    <?php foreach($reports as $report): ?>
+        <tr>
+            <td class="thead__name"><a href="<?php echo "../single?ID=" . $report["torrentID"] . "&report_mode=true" ?>"><?php echo $report["torrent_name"]; ?></a></td>
+            <td class="text-center"><?php echo date('Y-m-d H:i', strtotime($report["report_date"])); ?></td>
+            <td class="text-center" style="color: red;"><?php echo $report["reported_times"]; ?></td>
+        </tr>   
     <?php endforeach; ?>
 <?php endif; ?>

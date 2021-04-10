@@ -27,7 +27,7 @@ function clean_string($word)
     return $word;
 }
 
-// This function will only be uses in pagination.php // 
+// This function will only be uses in pagination.php  
 function number_of_pages($rows_per_page, $conection)
 {
     $total_rows = $conection->prepare("SELECT FOUND_ROWS() as total");
@@ -49,11 +49,10 @@ function check_o_and_c($path)
     if($_GET['c'] != "size" && $_GET['c'] != "date" && $_GET['c'] != "likes" && $_GET['c'] != "dislikes") // Check c
     {
         header("Location: " . $path);
-    }
-    
+    }  
 }
 
-// This is thw worst shit of this page, but it works... //
+// This is the worst shit of this page, but it works... 
 function get_rows($rows_per_page, $db, $conection, $optional)
 {   
     $begin = get_page() > 1 ? get_page() * $rows_per_page - $rows_per_page : 0;
@@ -99,6 +98,36 @@ function get_rows($rows_per_page, $db, $conection, $optional)
         $statement->execute();
         
         return $statement->fetchAll();
+    }
+}
+
+
+//Function for header
+function get_relative_path($file_name)
+{
+    $basename = basename(htmlspecialchars($_SERVER["PHP_SELF"]), ".php");
+
+    if($basename !== "users" && $basename !== "admins" && $basename !== "reports")
+    {
+        if($file_name !== "users" && $file_name !== "admins" && $file_name !== "reports")
+        {
+            return $file_name;
+        }
+        else
+        {
+            return "./admin/" . $file_name;
+        }
+    }
+    else
+    {
+        if($file_name === "users" || $file_name === "admins" || $file_name === "reports")
+        {
+            return $file_name;
+        }
+        else
+        {
+            return "../" . $file_name;
+        }
     }
 }
 

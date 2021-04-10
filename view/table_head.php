@@ -3,7 +3,13 @@
         <th class="thead__name"><?php echo basename($_SERVER["PHP_SELF"], ".php") === "admins" ? "Admin name" : "User Name"; ?></th>
         <th>Option</th>
     </tr>
-<?php else: ?>
+<?php elseif(basename($_SERVER["PHP_SELF"], ".php") === "reports"): ?>
+    <tr>
+        <th class="thead__name">Name</th>
+        <th style="width: 140px;">Date</th>
+        <th class="thead__downarrow relative">RT</th>
+    </tr>
+<?php else: ?>  
     <tr>
         <th class="thead__name">Name</th>
         <th class="thead__link">Link</th>

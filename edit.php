@@ -11,12 +11,12 @@ if(!$conection)
 
 if(isset($_GET["t"]))
 {
-    //Bring the torrent and check if It is mine and exist
+    //Bring the torrent and check if It is mine, or the user visiter It is a Admin and exist 
     $statement = $conection->prepare("SELECT * FROM torrents WHERE ID = :id LIMIT 1");
     $statement->execute(array("id" => clean_string($_GET["t"])));
     $torrent = $statement->fetch();
 
-    if($torrent["userID"] == $_SESSION["userID"] && !empty($torrent))
+    if(($torrent["userID"] == $_SESSION["userID"]) || $_SESSION["userType"] == "God" || $_SESSION["userType"] == "Admin" && !empty($torrent))
     {   
         //If request is by POST means that you can update or delete the torrent
         if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -39,6 +39,10 @@ if(isset($_GET["t"]))
             {
                 $statement = $conection->prepare("DELETE FROM torrents WHERE ID = :torrent_id LIMIT 1");
                 $statement->execute(array("torrent_id" => $torrent["ID"]));
+
+                //Delete reports
+                $statement = $conection->prepare("DELETE FROM reports WHERE torrentID = :torrent_id");
+                $statement->execute(array("torrent_id" => clean_string($_GET["t"])));
 
                 header("Location: index");
             }

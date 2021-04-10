@@ -41,7 +41,7 @@
         <div class="singletop-container">
             <div class="top">
                 <h3>
-                    <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $torrent["torrentOwnerName"]):?>
+                    <?php if(isset($_SESSION["user"]) && ($_SESSION["user"] == $torrent["torrentOwnerName"]) || $_SESSION["userType"] == "Admin" || $_SESSION["userType"] == "God"): ?>
                         <a href="<?php echo "edit?t=" . $torrent["ID"]?>" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
                     <?php endif; ?>
                     <?php echo $torrent["name"]; ?>
@@ -145,6 +145,30 @@
             <?php endif; ?>
             
         </div>
+
+        <?php if(isset($_GET["report_mode"]) && $_GET["report_mode"] == "true"): ?>
+            <div class="reports-container">
+                <div class="reports-container__top">
+                    <h3><?php echo "Reports - " . sizeof($reports); ?></h3>
+
+                    <?php if(!empty($reports)): ?>
+                        <div class="wrap-container">
+                            <?php $reports_size = sizeof($reports)?>
+                            <?php foreach($reports as $report): ?>
+                                <div class="report-text">
+                                    <div><?php echo $report["text"]?></div>
+                                    <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                                        <input name="report-id" value="<?php echo $report["ID"]; ?>" hidden>
+                                        <button name="solved-button" class="report-form__button" type="submit">Solved</button>
+                                    </form>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
     
     <?php echo '<script type="text/javascript" src="js/header.js"></script>'; ?>
