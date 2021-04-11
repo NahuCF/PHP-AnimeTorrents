@@ -89,7 +89,7 @@
                                 <?php endif; ?>
                                 <li>
                                     <a href="<?php echo get_relative_path("torrents") . "?u=" . $_SESSION["user"]; ?>">
-                                        <i class="fas fa-magnet"></i>
+                                        <i id="fa-magnet--grey" class="fas fa-magnet"></i>
                                         Torrents
                                     </a>
                                 </li>

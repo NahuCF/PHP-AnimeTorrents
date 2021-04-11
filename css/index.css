@@ -1159,6 +1159,18 @@ input::placeholder {
         flex-direction: column;
     }
     
+    header hr {
+        display: none;
+    }
+
+    header .fa-magnet {
+        color: #9d9d9d;
+    }
+
+    #fa-magnet--grey {
+        color: #9d9d9d;
+    }
+
     .header-bottom {
         width: 100%;
         flex-direction: column-reverse;

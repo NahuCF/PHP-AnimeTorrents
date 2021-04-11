@@ -41,7 +41,7 @@
         <div class="singletop-container">
             <div class="top">
                 <h3>
-                    <?php if(isset($_SESSION["user"]) && ($_SESSION["user"] == $torrent["torrentOwnerName"]) || $_SESSION["userType"] == "Admin" || $_SESSION["userType"] == "God"): ?>
+                    <?php if(isset($_SESSION["user"]) && $_SESSION["user"] == $torrent["torrentOwnerName"] || isset($_SESSION["user"]) && $_SESSION["userType"] == "Admin" || isset($_SESSION["user"]) &&  $_SESSION["userType"] == "God"): ?>
                         <a href="<?php echo "edit?t=" . $torrent["ID"]?>" style="color: black;"><i class="fas fa-pencil-alt"></i></a>
                     <?php endif; ?>
                     <?php echo $torrent["name"]; ?>

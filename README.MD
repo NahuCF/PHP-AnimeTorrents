@@ -1,12 +1,15 @@
-# Page for anime torrents (copy of nyaa) #
+# Site for anime torrents (copy of nyaa) #
 
 
 +  Register/LogIn with validation
 +  User profile
-+  Order torrents by size/date/likes/dislikes
++  Order torrents by size/date/seeders/leechers
 +  Update/dowload torrents (files)
-+  Search bar
-+  Comments
 +  View torrents of individual users and order them
-+  Little decoder for bencode
++  Search bar
++  Comments with markdown (TODO)
++  Admin and report panel
++  Asynchronous god panel (JSON)
++  Little decoder for bencode (TODO)
+
  

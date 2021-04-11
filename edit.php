@@ -37,6 +37,7 @@ if(isset($_GET["t"]))
             }
             else //User want to delete
             {
+                //Delete torrent
                 $statement = $conection->prepare("DELETE FROM torrents WHERE ID = :torrent_id LIMIT 1");
                 $statement->execute(array("torrent_id" => $torrent["ID"]));
 

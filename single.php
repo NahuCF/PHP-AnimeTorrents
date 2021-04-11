@@ -18,11 +18,7 @@ if(isset($_GET["ID"]))
     $statement->execute(array("ID" => $torrent_id));
     $torrent = $statement->fetch();
 
-    if(empty($torrent))
-    {
-        header("Location: index");
-    }
-    else
+    if(!empty($torrent))
     {
         $statement = $conection->prepare("SELECT * FROM comments WHERE torrentID = :torrent_id");
         $statement->execute(array("torrent_id" => $torrent_id));
@@ -102,11 +98,15 @@ if(isset($_GET["ID"]))
                 $statement->execute(array("torrent_id" => $torrent_id));
 
                 $statement = $conection->prepare("DELETE FROM reports WHERE ID = :report_id LIMIT 1");
-                $statement->execute(array("report_id" => $_POST["report-id"]));
+                $statement->execute(array("report_id" => clean_string($_POST["report-id"])));
                 
                 header("Location: single?ID=" . $torrent_id . "&report_mode=true");
             }
         }
+    }
+    else
+    {
+        header("Location: index");
     }
 }
 else
