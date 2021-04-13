@@ -34,10 +34,6 @@
             </div>
         </div>
     </div>
-
-    <div class="tuputamadre">
-
-    </div>
     
     <?php require "header.php"; ?>
 
@@ -113,7 +109,8 @@
             <?php if(empty($torrent["description"])): ?>
                 <h3>No description</h3>
             <?php else: ?>
-                <p><?php echo $torrent["description"]; ?></p>
+                <input class="input-markdown" value="<?php echo $torrent["description"]; ?>" type="text" hidden>
+                <div class="markdown-container"></div>
             <?php endif; ?>
         </div>
 
@@ -146,8 +143,7 @@
                     <textarea name="comment" id="comment"></textarea>
                     <button class="comment__form-button" type="submit">Submit</button>
                 </form>
-            <?php endif; ?>
-            
+            <?php endif; ?> 
         </div>
 
         <?php if(isset($_GET["report_mode"]) && $_GET["report_mode"] == "true"): ?>
@@ -182,6 +178,8 @@
         <?php echo '<script type="text/javascript" src="js/report.js"></script>'; ?>
     <?php endif; ?>
 
-    <?php echo '<script type="text/javascript" src="vendor/markdown.js"></script>'; ?>
+    <?php if(!empty($torrent["description"])): ?>
+        <?php echo '<script type="text/javascript" src="vendor/markdown.js"></script>'; ?>
+    <?php endif; ?>
 </body>
 </html>

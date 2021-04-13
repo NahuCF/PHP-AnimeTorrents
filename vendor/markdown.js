@@ -106,3 +106,9 @@ class Markdown
         }
     }
 }
+
+var container = document.getElementsByClassName("markdown-container")[0];
+var text = document.getElementsByClassName("input-markdown")[0].value;
+
+var instance = new Markdown(text, container);
+instance.makeConvertion();

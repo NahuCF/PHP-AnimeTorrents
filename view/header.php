@@ -1,7 +1,7 @@
 <?php $basename = basename(htmlspecialchars($_SERVER["PHP_SELF"]), ".php"); ?>
 <header>
         <div class="header-top">
-            <a style="font-size: 18px;" href="<?php echo get_relative_path("index"); ?>">Nyaa Copy</a>
+            <a style="font-size: 18px;" href="<?php echo get_relative_path("index"); ?>">Animu</a>
             <button id="hamburger-btn">
                 <span></span>
                 <span></span>

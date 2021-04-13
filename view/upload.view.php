@@ -10,7 +10,7 @@
     
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <title><?php echo "Upload torrent :: Nyaa Copy"; ?></title>
+    <title><?php echo "Upload torrent :: Animu"; ?></title>
 </head>
 <body>
     <?php require "header.php"; ?>

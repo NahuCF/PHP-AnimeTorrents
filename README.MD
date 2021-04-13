@@ -1,4 +1,4 @@
-# Site for anime torrents (copy of nyaa) #
+# Site for anime torrents #
 
 
 +  Register/LogIn with validation
@@ -12,4 +12,6 @@
 +  Asynchronous god panel (AJAX)
 +  Little decoder for bencode (TODO)
 
- 
+
+Under [MIT LICENSE](LICENSE)
+
