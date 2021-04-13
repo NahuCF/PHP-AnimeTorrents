@@ -7,9 +7,9 @@
 +  Update/dowload torrents (files)
 +  View torrents of individual users and order them
 +  Search bar
-+  Comments with markdown (TODO)
++  Comments with markdown
 +  Admin and report panel
-+  Asynchronous god panel (JSON)
++  Asynchronous god panel (AJAX)
 +  Little decoder for bencode (TODO)
 
  

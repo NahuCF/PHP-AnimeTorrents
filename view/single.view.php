@@ -35,6 +35,10 @@
         </div>
     </div>
 
+    <div class="tuputamadre">
+
+    </div>
+    
     <?php require "header.php"; ?>
 
     <div class="single-wrap">
@@ -68,11 +72,11 @@
                         <div><?php echo date('Y-m-d H:i', strtotime($torrent["date"])); ?></div>
                     </div>
                     <div class="center-container__row">
-                        <div class="center_container__left">Likes: </div>
+                        <div class="center_container__left">Seeders: </div>
                         <div style="color: green;"><?php echo $torrent["likes"]; ?></div>
                     </div>
                     <div class="center-container__row">
-                        <div class="center_container__left">Dislikes: </div>
+                        <div class="center_container__left">Leechers: </div>
                         <div style="color: red;"><?php echo $torrent["dislikes"]; ?></div>
                     </div>
                 </div>
@@ -99,7 +103,7 @@
                     </div>
                 </div>
 
-               <?php if(isset($_SESSION["user"])): ?>
+                <?php if(isset($_SESSION["user"])): ?>
                     <button id="report-btn" class="report-btn">Report</button>
                 <?php endif; ?>
             </div>
@@ -173,6 +177,11 @@
     
     <?php echo '<script type="text/javascript" src="js/header.js"></script>'; ?>
     <?php echo '<script type="text/javascript" src="js/user_menu.js"></script>'; ?>
-    <?php echo '<script type="text/javascript" src="js/report.js"></script>'; ?>
+    
+    <?php if(isset($_SESSION["user"])): ?>
+        <?php echo '<script type="text/javascript" src="js/report.js"></script>'; ?>
+    <?php endif; ?>
+
+    <?php echo '<script type="text/javascript" src="vendor/markdown.js"></script>'; ?>
 </body>
 </html>

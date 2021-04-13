@@ -40,7 +40,7 @@ if(isset($_GET["ID"]))
                 )
             );  
 
-            //header("Location: single?ID=" . $torrent_id);
+            header("Location: single?ID=" . $torrent_id);
         }
         else if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["reportesito"])) //Report a torrent
         {
