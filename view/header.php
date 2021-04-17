@@ -38,7 +38,7 @@
                     </input> 
                     <?php if($basename != "users" && $basename != "admins"): ?>
                         <div class="button__headercontenedor" >
-                            <button class="header__submitbtn" type="submit"><i class="fa fa-search fa-fw"></i></button>
+                            <button aria-label="Button that find the torrent especified" class="header__submitbtn" type="submit"><i class="fa fa-search fa-fw"></i></button>
                         </div>
                     <?php endif; ?>
                 </form>

@@ -1,8 +1,8 @@
-var promoteBtn = document.getElementsByClassName("promote");
-var table = document.getElementsByTagName("table")[0];
-var tableBody = document.getElementsByTagName("tbody")[0];
-var input = document.getElementsByClassName("input_search")[0];
-var inputButton = document.getElementsByClassName("header__submitbtn")[0];
+var promoteBtn = document.getElementsByClassName("promote"),
+    table = document.getElementsByTagName("table")[0],
+    tableBody = document.getElementsByTagName("tbody")[0],
+    input = document.getElementsByClassName("input_search")[0],
+    inputButton = document.getElementsByClassName("header__submitbtn")[0];
 
 table.style.width = "unset";
 

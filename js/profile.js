@@ -1,9 +1,8 @@
-var passwordTab = document.getElementById("profile__tabs-password");
-var emailTab = document.getElementById("profile__tabs-email");
-var passwordForm = document.getElementsByClassName("profile__form-password")[0];
-var emailForm = document.getElementsByClassName("profile__form-email")[0];
-
-var profile__tabs = document.getElementsByClassName("profile__tabs")[0];
+var passwordTab = document.getElementById("profile__tabs-password"),
+    emailTab = document.getElementById("profile__tabs-email"),
+    passwordForm = document.getElementsByClassName("profile__form-password")[0],
+    emailForm = document.getElementsByClassName("profile__form-email")[0],
+    profile__tabs = document.getElementsByClassName("profile__tabs")[0];
 
 passwordTab.addEventListener("click", function()
 {

@@ -1,8 +1,8 @@
-var demoteBtn = document.getElementsByClassName("demote");
-var table = document.getElementsByTagName("table")[0];
-var tableBody = document.getElementsByTagName("tbody")[0];
-var input = document.getElementsByClassName("input_search")[0];
-var inputButton = document.getElementsByClassName("header__submitbtn")[0];
+var demoteBtn = document.getElementsByClassName("demote"),
+    table = document.getElementsByTagName("table")[0],
+    tableBody = document.getElementsByTagName("tbody")[0],
+    input = document.getElementsByClassName("input_search")[0],
+    inputButton = document.getElementsByClassName("header__submitbtn")[0];
 
 table.style.width = "unset";
 
