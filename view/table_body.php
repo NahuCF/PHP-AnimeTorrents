@@ -16,7 +16,7 @@
             <td class="text-center" style="color: red;"><?php echo $row["dislikes"]; ?></td>
         </tr>
     <?php endforeach; ?>
-<?php elseif(isset($users)): ?>
+<?php elseif(isset($users)): ?> 
     <?php foreach($users as $user): ?>
         <tr>
             <td class="thead__name"><?php echo $user["user"]; ?></td>

@@ -31,8 +31,8 @@ else if(isset($_POST["scroll_times"]))
 }
 else
 {
-
     $end = $page_config["users_per_page"];
+
     $statement = $conection->query("SELECT * FROM users WHERE userType = 'User' LIMIT 0, $end");
     $users = $statement->fetchAll();
 }

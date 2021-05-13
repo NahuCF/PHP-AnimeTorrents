@@ -8,6 +8,6 @@
     <title><?php echo "Error :: Animu"; ?></title>
 </head>
 <body>
-    <h1>ERROR CONNECTING TO DATABASE</h1>
+    <h1>ERROR</h1>
 </body>
 </html>

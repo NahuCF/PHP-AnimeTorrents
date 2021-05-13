@@ -1,10 +1,17 @@
 RewriteEngine On
 
-# Delete the .php extension
+# Add the .php extension internally
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.*)$ $1.php [L]
+RewriteRule ^([^.]+)$ $1.php [L]
 
+# Friendly URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^user/(.*)$ user.php?ID=$1 [L]
 
-RewriteCond %{REQUEST_FILENAME} -admin
-RewriteRule . /index [L]
+# If the file does not exist redirect to error.php
+RewriteCond %{ENV:REDIRECT_STATUS} ""
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . error.php [L]

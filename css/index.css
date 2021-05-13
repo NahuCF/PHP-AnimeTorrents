@@ -1103,6 +1103,7 @@ input::placeholder {
 
 .demote:hover {
     background-color: #C9302C;
+    cursor: pointer;
 }
 
 .input_search--borders {

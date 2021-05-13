@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit colors="true" bootstrap="vendor/autoload.php"> <!-- This will allow me to load the classes and color the messages -->
+</phpunit>

@@ -7,7 +7,7 @@ $db_config = array(
 );
 
 $page_config = array(
-    "rows_per_page" => 40,
+    "rows_per_page" => 18,
     "users_per_page" => 20
 );
 
