@@ -1,4 +1,4 @@
-** Importante: ** Este proyecto es extremadamente antiguo y no representa lo que puedo hacer actualmente.
+**Importante:** Este proyecto es extremadamente antiguo y no representa lo que puedo hacer actualmente.
 
 # Site for anime torrents #
 
