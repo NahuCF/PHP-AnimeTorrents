@@ -1,4 +1,6 @@
-**Importante:** Este proyecto es extremadamente antiguo y no es un buen representativo de mis habilidades actuales.
+**IMPORTANTE:** Este proyecto es extremadamente antiguo y no es un buen representativo de mis habilidades actuales.
+**IMPORTANT:** Old and outdated project.
+
 
 # Site for anime torrents #
 
